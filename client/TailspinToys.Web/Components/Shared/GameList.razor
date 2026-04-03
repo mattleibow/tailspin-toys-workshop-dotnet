@@ -1,27 +1,31 @@
 @rendermode InteractiveServer
 @inject IHttpClientFactory HttpClientFactory
 
-@if (isLoading)
-{
-    <LoadingSkeleton />
-}
-else if (errorMessage is not null)
-{
-    <ErrorMessage Message="@errorMessage" />
-}
-else if (games is null || games.Length == 0)
-{
-    <EmptyState />
-}
-else
-{
-    <div data-testid="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach (var game in games)
-        {
-            <GameCard Game="game" />
-        }
-    </div>
-}
+<div>
+    <h2 class="text-2xl font-medium mb-6 text-slate-100">Featured Games</h2>
+
+    @if (isLoading)
+    {
+        <LoadingSkeleton />
+    }
+    else if (errorMessage is not null)
+    {
+        <ErrorMessage Message="@errorMessage" />
+    }
+    else if (games is null || games.Length == 0)
+    {
+        <EmptyState />
+    }
+    else
+    {
+        <div data-testid="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach (var game in games)
+            {
+                <GameCard Game="game" />
+            }
+        </div>
+    }
+</div>
 
 @code {
     private Game[]? games;
