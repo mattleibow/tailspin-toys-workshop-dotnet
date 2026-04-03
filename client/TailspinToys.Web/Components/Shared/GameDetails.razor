@@ -108,32 +108,10 @@ else if (game is not null)
 
     private string GetStarDisplay(double rating)
     {
-        var stars = new System.Text.StringBuilder();
         int fullStars = (int)Math.Floor(rating);
-        bool hasHalf = (rating - fullStars) >= 0.25 && (rating - fullStars) < 0.75;
-        bool roundUp = (rating - fullStars) >= 0.75;
+        bool halfStar = rating % 1 >= 0.5;
+        int emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
-        if (roundUp)
-        {
-            fullStars++;
-        }
-
-        for (int i = 0; i < fullStars && i < 5; i++)
-        {
-            stars.Append('★');
-        }
-
-        if (hasHalf && fullStars < 5)
-        {
-            stars.Append('½');
-            fullStars++;
-        }
-
-        for (int i = fullStars; i < 5; i++)
-        {
-            stars.Append('☆');
-        }
-
-        return stars.ToString();
+        return new string('★', fullStars) + (halfStar ? "½" : "") + new string('☆', emptyStars);
     }
 }

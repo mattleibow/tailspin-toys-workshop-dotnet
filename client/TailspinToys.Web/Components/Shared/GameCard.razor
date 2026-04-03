@@ -26,7 +26,7 @@
                 </div>
             }
 
-            <p data-testid="game-description" class="text-slate-400 mb-4 text-sm line-clamp-2">@TruncateDescription(Game.Description)</p>
+            <p data-testid="game-description" class="text-slate-400 mb-4 text-sm line-clamp-2">@Game.Description</p>
 
             <div class="mt-4 text-sm text-blue-400 font-medium flex items-center">
                 <span>View details</span>
@@ -41,10 +41,4 @@
 @code {
     [Parameter, EditorRequired]
     public Game Game { get; set; } = default!;
-
-    private string TruncateDescription(string description)
-    {
-        if (string.IsNullOrEmpty(description)) return "";
-        return description.Length > 150 ? description[..150] + "..." : description;
-    }
 }

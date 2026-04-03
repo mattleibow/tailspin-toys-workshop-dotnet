@@ -11,10 +11,11 @@ This skill provides guidance on writing and running tests for the Tailspin Toys 
 
 ## E2E Tests (Playwright)
 
-- Tests are in `client/e2e-tests/`
+- Tests are in `client/TailspinToys.E2E/`
 - Run with: `./scripts/run-e2e-tests.sh`
+- Written in C# with xUnit and Microsoft.Playwright
 - Use `data-testid` attributes for element selection
-- Use `test.step()` for logical grouping
+- Use `GetByTestId`, `GetByRole`, `GetByText` locators
 - Never use hard-coded waits
 
 ## Test Data

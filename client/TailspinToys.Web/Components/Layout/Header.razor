@@ -1,11 +1,12 @@
-@rendermode InteractiveServer
+@inject IJSRuntime JS
 
 <header class="bg-blue-500 dark:bg-blue-700 text-white p-4 shadow-md transition-colors duration-300">
     <div class="container mx-auto flex justify-between items-center pl-4 pr-4">
         <div class="flex items-center">
-            <div class="relative">
+            <div class="relative group">
                 <button id="menu-toggle"
                         @onclick="ToggleMenu"
+                        @onclick:stopPropagation="true"
                         class="focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-500 rounded mr-4"
                         aria-label="Toggle menu"
                         aria-expanded="@isMenuOpen"
@@ -25,6 +26,21 @@
         </div>
     </div>
 </header>
+
+<script suppress-error="BL9992">
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        var menuToggle = document.getElementById('menu-toggle');
+        var menu = document.getElementById('menu');
+        if (menuToggle && menu) {
+            var isClickInside = menuToggle.contains(event.target) || menu.contains(event.target);
+            if (!isClickInside && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+</script>
 
 @code {
     private bool isMenuOpen = false;

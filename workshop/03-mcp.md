@@ -66,10 +66,11 @@ MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the
 8. Set the **Command** to **npx @playwright/mcp@latest**.
 9. Select <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the server.
 10. Select <kbd>A</kbd> to add another server.
-11. Follow steps 5 through 9 to register Microsoft Learn, using the following table:
+11. Follow steps 5 through 9 to register Playwright and Microsoft Learn, using the following table:
 
     | Server Name | Server Type | Command or URL |
     | ----------- | ----------- | -------------- |
+    | Playwright | \[1\] Local | `npx @playwright/mcp@latest` |
     | Microsoft Learn | \[3\] HTTP | `https://learn.microsoft.com/api/mcp` |
 
 12. Once complete, select <kbd>Q</kbd> to exit the interface.
