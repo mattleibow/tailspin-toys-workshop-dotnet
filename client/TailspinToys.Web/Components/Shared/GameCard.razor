@@ -8,24 +8,6 @@
         <div class="relative z-10">
             <h3 data-testid="game-title" class="text-xl font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors">@Game.Title</h3>
 
-            @if (Game.Category is not null || Game.Publisher is not null)
-            {
-                <div class="flex gap-2 mb-3">
-                    @if (Game.Category is not null)
-                    {
-                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-blue-900/60 text-blue-300" data-testid="game-category">
-                            @Game.Category.Name
-                        </span>
-                    }
-                    @if (Game.Publisher is not null)
-                    {
-                        <span class="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-900/60 text-purple-300" data-testid="game-publisher">
-                            @Game.Publisher.Name
-                        </span>
-                    }
-                </div>
-            }
-
             <p data-testid="game-description" class="text-slate-400 mb-4 text-sm line-clamp-2">@Game.Description</p>
 
             <div class="mt-4 text-sm text-blue-400 font-medium flex items-center">
