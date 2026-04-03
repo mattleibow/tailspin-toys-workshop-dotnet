@@ -16,8 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <link rel="alternate" hreflang="en" href="https://copilot-dev-days.github.io/tailspin-toys-workshop-dotnet/step.html">
-    <link rel="alternate" hreflang="x-default" href="https://copilot-dev-days.github.io/tailspin-toys-workshop-dotnet/step.html">
+    <link rel="alternate" hreflang="en" href="https://mattleibow.github.io/tailspin-toys-workshop/step.html">
+    <link rel="alternate" hreflang="x-default" href="https://mattleibow.github.io/tailspin-toys-workshop/step.html">
     <link rel="stylesheet" href="step.css">
     <link rel="stylesheet" href="light-theme.css">
     <script src="theme-toggle.js"></script>
@@ -75,8 +75,17 @@
             { id: '08-review', file: 'workshop/08-review.md', title: 'Review & Next Steps', number: '08' },
         ];
 
+        const DEFAULT_REPO_OWNER = 'mattleibow';
+        const DEFAULT_REPO_NAME = 'tailspin-toys-workshop';
+        const WORKSHOP_BRANCH = 'dotnet-workshop';
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-        const GITHUB_RAW_BASE = isLocal ? '../' : 'https://raw.githubusercontent.com/copilot-dev-days/tailspin-toys-workshop-dotnet/dotnet-workshop/';
+        const isGitHubPages = window.location.hostname.endsWith('.github.io');
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const repoOwner = isGitHubPages ? window.location.hostname.split('.')[0] : DEFAULT_REPO_OWNER;
+        const repoName = isGitHubPages && pathSegments.length > 0 ? pathSegments[0] : DEFAULT_REPO_NAME;
+        const SITE_CONTENT_BASE = isLocal ? '../' : './';
+        const GITHUB_REPO_URL = `https://github.com/${repoOwner}/${repoName}/tree/${WORKSHOP_BRANCH}`;
+        const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${WORKSHOP_BRANCH}/`;
         const COPY_FEEDBACK_DURATION_MS = 2000;
         const MAX_CODE_PREVIEW_LENGTH = 40;
         const copyResetTimers = new WeakMap();
@@ -258,22 +267,46 @@
             contentEl.innerHTML = '<div class="loading">Loading content</div>';
 
             try {
-                const url = GITHUB_RAW_BASE + step.file;
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                let md = await res.text();
+                const contentSources = [
+                    { url: SITE_CONTENT_BASE + step.file, assetBase: SITE_CONTENT_BASE },
+                    { url: GITHUB_RAW_BASE + step.file, assetBase: GITHUB_RAW_BASE }
+                ];
+
+                let md = null;
+                let assetBase = SITE_CONTENT_BASE;
+                let lastError = null;
+
+                for (const source of contentSources) {
+                    try {
+                        const res = await fetch(source.url);
+                        if (!res.ok) {
+                            throw new Error(`HTTP ${res.status}`);
+                        }
+
+                        md = await res.text();
+                        assetBase = source.assetBase;
+                        break;
+                    } catch (error) {
+                        lastError = error;
+                    }
+                }
+
+                if (md === null) {
+                    throw lastError ?? new Error('Unable to load content');
+                }
+
                 md = processMarkdown(md);
                 // Fix relative image paths to resolve against the markdown file's directory
                 const stepDir = step.file.substring(0, step.file.lastIndexOf('/') + 1);
                 // Handle inline-style images: ![alt](./images/foo.png)
                 md = md.replace(/!\[([^\]]*)\]\((?!https?:\/\/|\/\/)([^)]+)\)/g, (match, alt, path) => {
                     const cleanPath = path.replace(/^\.\//, '');
-                    return `![${alt}](${GITHUB_RAW_BASE}${stepDir}${cleanPath})`;
+                    return `![${alt}](${assetBase}${stepDir}${cleanPath})`;
                 });
                 // Handle reference-style image definitions: [label]: ./images/foo.png
                 md = md.replace(/^(\[[^\]]+\]):\s*((?!https?:\/\/|\/\/)\S+\.(png|jpe?g|gif|svg|webp))([ \t].*)?$/gim, (match, label, path, ext, title) => {
                     const cleanPath = path.replace(/^\.\//, '');
-                    return `${label}: ${GITHUB_RAW_BASE}${stepDir}${cleanPath}${title || ''}`;
+                    return `${label}: ${assetBase}${stepDir}${cleanPath}${title || ''}`;
                 });
                 let html = marked.parse(md);
                 const parser = new DOMParser();
@@ -294,7 +327,7 @@
                 contentEl.innerHTML = `
                     <div class="markdown">
                         <h1>${step.title}</h1>
-                        <p>Could not load content. Please check the <a href="https://github.com/copilot-dev-days/tailspin-toys-workshop-dotnet/tree/dotnet-workshop" target="_blank">GitHub repository</a> directly.</p>
+                        <p>Could not load content. Please check the <a href="${GITHUB_REPO_URL}" target="_blank">GitHub repository</a> directly.</p>
                         <p style="color: var(--text-secondary); font-size: 0.875rem;">Error: ${err.message}</p>
                     </div>`;
             }
