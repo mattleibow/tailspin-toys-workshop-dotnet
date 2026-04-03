@@ -86,7 +86,7 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
     - `Components/Layout/`: Layout components
     - `Components/Pages/`: Page components with routing
     - `wwwroot/`: Static files
-  - `e2e-tests/`: Playwright E2E tests (home, games, accessibility)
+  - `TailspinToys.E2E/`: Playwright E2E tests in C# (home, games, accessibility)
 - `scripts/`: Development and deployment scripts
 - `data/`: Database files
 - `README.md`: Project documentation

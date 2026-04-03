@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [dotnet-workshop]
   workflow_dispatch:
 
 permissions:
@@ -22,6 +22,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # Verify .NET solution builds before deploying docs
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build solution
+        run: dotnet build --configuration Release
 
       - name: Prepare deployment
         run: |

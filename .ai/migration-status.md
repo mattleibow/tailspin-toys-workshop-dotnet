@@ -1,6 +1,6 @@
 # Tailspin Toys Workshop Migration: Node/Python → .NET 10
 
-## Status: ✅ COMPLETE
+## Status: ✅ COMPLETE (Phase 2 - Full .NET conversion)
 
 ## Validation Results
 - ✅ All 12 backend tests passing (xUnit)
@@ -15,6 +15,13 @@
 - ✅ Docs site files present
 - ✅ No stale Python/Flask/Svelte/Astro references in workshop content
 - ✅ DevContainer configured for .NET 10
+- ✅ **E2E tests converted to C#/xUnit with Microsoft.Playwright** (Phase 2)
+- ✅ **All workflows updated to reference dotnet-workshop branch** (Phase 2)
+- ✅ **GitHub Pages deploy workflow uses dotnet build verification** (Phase 2)
+- ✅ **All npm/Node.js removed from workflows** (except Copilot CLI install) (Phase 2)
+- ✅ **AGENTS.md and copilot-instructions.md updated for C# E2E tests** (Phase 2)
+- ✅ **Playwright instruction file rewritten for C#** (Phase 2)
+- ✅ **Solution file includes all 4 projects** (Phase 2)
 
 ## Decisions Made
 - Blazor Interactive Server (not WASM) for frontend

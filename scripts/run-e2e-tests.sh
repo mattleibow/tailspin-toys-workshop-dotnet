@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run end-to-end tests: Playwright will automatically start servers via webServer config
+# Run end-to-end tests
 
 # Define color codes
 GREEN='\033[0;32m'
@@ -14,17 +14,16 @@ else
     PROJECT_ROOT=$(pwd)
 fi
 
-cd "$PROJECT_ROOT/client/e2e-tests" || exit 1
-
 echo -e "${BLUE}Starting Tailspin Toys E2E Tests${NC}"
-echo -e "${GREEN}Starting servers...${NC}"
+echo -e "${GREEN}Servers should be running:${NC}"
 echo -e "  • ASP.NET Core API server: http://localhost:5100"
 echo -e "  • Blazor client server: http://localhost:4321"
 echo ""
 echo -e "${BLUE}Running tests:${NC}"
 
-# Run Playwright tests - this will automatically start the servers silently
-npx playwright test
+# Run Playwright E2E tests
+cd "$PROJECT_ROOT" || exit 1
+dotnet test client/TailspinToys.E2E/ --verbosity minimal
 
 # Store the exit code
 TEST_EXIT_CODE=$?

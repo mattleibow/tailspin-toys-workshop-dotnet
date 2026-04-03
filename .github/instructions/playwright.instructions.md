@@ -1,6 +1,6 @@
 ---
 description: 'Playwright E2E test patterns and locator conventions'
-applyTo: '**/e2e-tests/**/*.ts'
+applyTo: '**/TailspinToys.E2E/**/*.cs'
 ---
 
 # Playwright E2E Test Instructions
@@ -9,45 +9,50 @@ applyTo: '**/e2e-tests/**/*.ts'
 
 ### Test Structure
 
-```typescript
-import { test, expect } from '@playwright/test';
+```csharp
+using Microsoft.Playwright;
 
-test.describe('Feature Name', () => {
-  test('should do something specific', async ({ page }) => {
-    await test.step('Navigate to page', async () => {
-      await page.goto('/');
-    });
+public class FeatureTests : PlaywrightTestBase
+{
+    [Fact]
+    public async Task ShouldDoSomethingSpecific()
+    {
+        // Navigate to page
+        await Page.GotoAsync("/");
 
-    await test.step('Verify content', async () => {
-      const element = page.getByTestId('element-id');
-      await expect(element).toBeVisible();
-    });
-  });
-});
+        // Verify content
+        var element = Page.GetByTestId("element-id");
+        await Expect(element).ToBeVisibleAsync();
+    }
+
+    private static ILocatorAssertions Expect(ILocator locator) => Assertions.Expect(locator);
+    private static IPageAssertions Expect(IPage page) => Assertions.Expect(page);
+}
 ```
 
 ### Locator Strategies (Priority Order)
 
-1. **`getByTestId`** - For elements with `data-testid`
-2. **`getByRole`** - For semantic HTML elements
-3. **`getByText`** - For text content
-4. **`getByLabel`** - For form elements
+1. **`GetByTestId`** - For elements with `data-testid`
+2. **`GetByRole`** - For semantic HTML elements
+3. **`GetByText`** - For text content
+4. **`GetByLabel`** - For form elements
 
 ### Auto-Retrying Assertions
 
-Always use `await expect()` for assertions:
-```typescript
-await expect(page.getByTestId('games-grid')).toBeVisible();
-await expect(page.getByTestId('game-title')).not.toBeEmpty();
-await expect(page).toHaveURL('/game/1');
+Always use `await Expect()` for assertions:
+```csharp
+await Expect(Page.GetByTestId("games-grid")).ToBeVisibleAsync();
+await Expect(Page.GetByTestId("game-title")).Not.ToBeEmptyAsync();
+await Expect(Page).ToHaveURLAsync("/game/1");
 ```
 
 ### Important Rules
 
-- **NEVER** use `waitForTimeout` or hard-coded waits
-- Use `test.step()` for logical grouping
+- **NEVER** use `Task.Delay` or hard-coded waits
+- Use descriptive test method names
 - Take screenshots only on failure
 - Use `data-testid` for all interactive elements
+- All test classes should extend `PlaywrightTestBase`
 
 ### Available Test IDs
 

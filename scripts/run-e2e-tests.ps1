@@ -1,20 +1,20 @@
-# Run end-to-end tests: Playwright will automatically start servers via webServer config
+# Run end-to-end tests
 
 # Determine project root
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectRoot = Split-Path -Parent $ScriptDir
 
-Set-Location "$ProjectRoot\client\e2e-tests"
+Set-Location $ProjectRoot
 
 Write-Host "Starting Tailspin Toys E2E Tests" -ForegroundColor Blue
-Write-Host "Starting servers..." -ForegroundColor Green
+Write-Host "Servers should be running:" -ForegroundColor Green
 Write-Host "  * ASP.NET Core API server: http://localhost:5100"
 Write-Host "  * Blazor client server: http://localhost:4321"
 Write-Host ""
 Write-Host "Running tests:" -ForegroundColor Blue
 
-# Run Playwright tests - this will automatically start the servers silently
-npx playwright test
+# Run Playwright E2E tests
+dotnet test client\TailspinToys.E2E\ --verbosity minimal
 
 # Store and return the exit code
 $TestExitCode = $LASTEXITCODE

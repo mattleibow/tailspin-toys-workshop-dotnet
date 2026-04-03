@@ -57,7 +57,7 @@ tailspin-toys/
 │   │   │   └── Shared/           # Reusable components
 │   │   ├── Models/               # Client-side data models
 │   │   └── wwwroot/              # Static files
-│   └── e2e-tests/                # Playwright E2E tests (*.spec.ts)
+│   └── TailspinToys.E2E/         # Playwright E2E tests (C#/xUnit)
 ├── scripts/                       # Development automation scripts
 ├── data/                          # SQLite database files
 └── .github/
@@ -154,14 +154,14 @@ return Results.BadRequest(new { error = "Invalid input" });
 
 ### Frontend Tests
 
-**Existing E2E Tests** (`client/e2e-tests/*.spec.ts`)
+**Existing E2E Tests** (`client/TailspinToys.E2E/`)
 
-The project includes comprehensive Playwright E2E tests:
-- `home.spec.ts` - Homepage display and content
-- `games.spec.ts` - Game listing, navigation, and details pages
-- `accessibility.spec.ts` - Accessibility compliance tests
+The project includes comprehensive Playwright E2E tests written in C# with xUnit:
+- `HomeTests.cs` - Homepage display and content
+- `GamesTests.cs` - Game listing, navigation, and details pages
+- `AccessibilityTests.cs` - Accessibility compliance tests
 
-**Before creating new E2E tests**, check existing coverage in `client/e2e-tests/`.
+**Before creating new E2E tests**, check existing coverage in `client/TailspinToys.E2E/`.
 
 **Playwright Patterns**
 - Use role-based locators: `getByRole`, `getByLabel`, `getByText`
