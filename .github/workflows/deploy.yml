@@ -37,14 +37,9 @@ jobs:
           mkdir -p ./_site
           cp -r docs/* ./_site/
           mkdir -p ./_site/workshop
-          cp workshop/*.md ./_site/workshop/
           cp -r workshop/images ./_site/workshop/
-          md_count=$(find workshop -maxdepth 1 -name '*.md' | wc -l)
-          dest_md_count=$(find ./_site/workshop -maxdepth 1 -name '*.md' | wc -l)
           src_count=$(find workshop/images -type f | wc -l)
           dest_count=$(find ./_site/workshop/images -type f | wc -l)
-          [ "$md_count" -gt 0 ] || { echo "No workshop markdown files found at workshop/."; exit 1; }
-          [ "$md_count" -eq "$dest_md_count" ] || { echo "Markdown copy mismatch: source=$md_count destination=$dest_md_count."; exit 1; }
           [ "$src_count" -gt 0 ] || { echo "No source workshop images found at workshop/images."; exit 1; }
           [ "$src_count" -eq "$dest_count" ] || { echo "Image copy mismatch: source=$src_count destination=$dest_count."; exit 1; }
           touch ./_site/.nojekyll
