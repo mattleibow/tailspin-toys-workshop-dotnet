@@ -46,8 +46,8 @@ jobs:
       - name: Restore .NET dependencies
         run: dotnet restore
 
-      - name: Build E2E test project
-        run: dotnet build client/TailspinToys.E2E/
+      - name: Build all projects
+        run: dotnet build
 
       - name: Install Playwright browsers
         run: pwsh client/TailspinToys.E2E/bin/Debug/net10.0/playwright.ps1 install --with-deps

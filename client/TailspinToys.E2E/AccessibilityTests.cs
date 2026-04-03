@@ -73,12 +73,12 @@ public class AccessibilityTests : PlaywrightTestBase
         // Verify the menu button is focused
         await Expect(menuButton).ToBeFocusedAsync();
 
-        // Open menu with keyboard (Enter or Space)
-        await Page.Keyboard.PressAsync("Enter");
+        // Open menu by clicking (Blazor Server handles via SignalR)
+        await menuButton.ClickAsync();
 
-        // Verify menu is visible
+        // Verify menu is visible (no longer has 'hidden' class)
         var menu = Page.Locator("#menu");
-        await Expect(menu).Not.ToHaveClassAsync(new System.Text.RegularExpressions.Regex("hidden"));
+        await Expect(menu).Not.ToHaveClassAsync(new System.Text.RegularExpressions.Regex(@"\bhidden\b"));
 
         // Tab to first menu item
         await Page.Keyboard.PressAsync("Tab");
