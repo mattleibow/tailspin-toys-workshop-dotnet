@@ -1,0 +1,8 @@
+<div class="bg-slate-800/60 backdrop-blur-sm rounded-xl border border-red-700/50 p-8 text-center max-w-md mx-auto">
+    <p class="text-red-400 text-lg">@Message</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; } = "An error occurred.";
+}

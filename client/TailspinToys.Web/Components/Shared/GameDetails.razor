@@ -1,0 +1,124 @@
+@rendermode InteractiveServer
+@inject IHttpClientFactory HttpClientFactory
+
+@if (isLoading)
+{
+    <div class="max-w-3xl mx-auto animate-pulse">
+        <div class="h-10 bg-slate-700 rounded w-2/3 mb-4"></div>
+        <div class="flex gap-2 mb-6">
+            <div class="h-6 bg-slate-700 rounded-full w-24"></div>
+            <div class="h-6 bg-slate-700 rounded-full w-28"></div>
+        </div>
+        <div class="space-y-3">
+            <div class="h-4 bg-slate-700 rounded w-full"></div>
+            <div class="h-4 bg-slate-700 rounded w-5/6"></div>
+            <div class="h-4 bg-slate-700 rounded w-4/6"></div>
+        </div>
+    </div>
+}
+else if (errorMessage is not null)
+{
+    <ErrorMessage Message="@errorMessage" />
+}
+else if (game is not null)
+{
+    <div data-testid="game-details" class="max-w-3xl mx-auto">
+        <a href="/" class="inline-flex items-center text-blue-400 hover:text-blue-300 mb-8 no-underline transition-colors">
+            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to all games
+        </a>
+
+        <div class="bg-slate-800/60 backdrop-blur-sm rounded-xl border border-slate-700/50 p-8">
+            <h1 data-testid="game-details-title" class="text-3xl sm:text-4xl font-bold text-slate-100 mb-4">@game.Title</h1>
+
+            <div class="flex flex-wrap gap-3 mb-6">
+                @if (game.Category is not null)
+                {
+                    <span data-testid="game-details-category" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-900/60 text-blue-300">
+                        @game.Category.Name
+                    </span>
+                }
+                @if (game.Publisher is not null)
+                {
+                    <span data-testid="game-details-publisher" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-900/60 text-purple-300">
+                        @game.Publisher.Name
+                    </span>
+                }
+            </div>
+
+            @if (game.StarRating.HasValue)
+            {
+                <div data-testid="game-rating" class="flex items-center gap-2 mb-6">
+                    <div class="text-yellow-400 text-xl tracking-wider">@GetStarDisplay(game.StarRating.Value)</div>
+                    <span class="text-slate-400 text-sm">(@game.StarRating.Value.ToString("0.0"))</span>
+                </div>
+            }
+
+            <p data-testid="game-details-description" class="text-slate-300 leading-relaxed mb-8">@game.Description</p>
+
+            <button data-testid="back-game-button"
+                    class="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors duration-200 shadow-lg shadow-blue-600/20">
+                Support This Game
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public int GameId { get; set; }
+
+    private Game? game;
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("API");
+            game = await client.GetFromJsonAsync<Game>($"api/games/{GameId}");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to load game details: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private string GetStarDisplay(double rating)
+    {
+        var stars = new System.Text.StringBuilder();
+        int fullStars = (int)Math.Floor(rating);
+        bool hasHalf = (rating - fullStars) >= 0.25 && (rating - fullStars) < 0.75;
+        bool roundUp = (rating - fullStars) >= 0.75;
+
+        if (roundUp)
+        {
+            fullStars++;
+        }
+
+        for (int i = 0; i < fullStars && i < 5; i++)
+        {
+            stars.Append('★');
+        }
+
+        if (hasHalf && fullStars < 5)
+        {
+            stars.Append('½');
+            fullStars++;
+        }
+
+        for (int i = fullStars; i < 5; i++)
+        {
+            stars.Append('☆');
+        }
+
+        return stars.ToString();
+    }
+}

@@ -1,0 +1,60 @@
+@rendermode InteractiveServer
+
+<header class="bg-blue-700 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <a href="/" class="text-xl font-bold tracking-tight hover:text-blue-200 transition-colors no-underline text-white">
+                Tailspin Toys
+            </a>
+            <div class="relative">
+                <button @onclick="ToggleMenu"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-blue-200 hover:text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition-colors"
+                        aria-expanded="@isMenuOpen"
+                        aria-label="Main menu">
+                    @if (isMenuOpen)
+                    {
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    }
+                    else
+                    {
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    }
+                </button>
+
+                @if (isMenuOpen)
+                {
+                    <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 z-50">
+                        <div class="py-1">
+                            <a href="/" @onclick="CloseMenu"
+                               class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-white no-underline transition-colors">
+                                Home
+                            </a>
+                            <a href="/about" @onclick="CloseMenu"
+                               class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-700 hover:text-white no-underline transition-colors">
+                                About
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+
+@code {
+    private bool isMenuOpen = false;
+
+    private void ToggleMenu()
+    {
+        isMenuOpen = !isMenuOpen;
+    }
+
+    private void CloseMenu()
+    {
+        isMenuOpen = false;
+    }
+}
