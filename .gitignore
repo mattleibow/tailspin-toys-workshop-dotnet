@@ -53,3 +53,7 @@ msbuild.wrn
 # Playwright
 test-results/
 playwright-report/
+*.png
+.playwright-mcp/
+data/*.db-shm
+data/*.db-wal

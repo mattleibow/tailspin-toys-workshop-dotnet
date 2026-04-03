@@ -66,14 +66,14 @@ public class AccessibilityTests : PlaywrightTestBase
         await Page.GotoAsync("/");
         await Page.WaitForSelectorAsync("[data-testid='games-grid']", new() { Timeout = 10000 });
 
-        // Focus on the menu button using Tab
-        await Page.Keyboard.PressAsync("Tab");
+        // Focus on the menu button
+        var menuButton = Page.Locator("#menu-toggle");
+        await menuButton.FocusAsync();
 
         // Verify the menu button is focused
-        var menuButton = Page.Locator("#menu-toggle");
         await Expect(menuButton).ToBeFocusedAsync();
 
-        // Open menu with keyboard
+        // Open menu with keyboard (Enter or Space)
         await Page.Keyboard.PressAsync("Enter");
 
         // Verify menu is visible

@@ -86,11 +86,19 @@ else if (game is not null)
         try
         {
             var client = HttpClientFactory.CreateClient("API");
-            game = await client.GetFromJsonAsync<Game>($"api/games/{GameId}");
+            var response = await client.GetAsync($"api/games/{GameId}");
+            if (response.IsSuccessStatusCode)
+            {
+                game = await response.Content.ReadFromJsonAsync<Game>();
+            }
+            else
+            {
+                errorMessage = $"Failed to fetch game: {(int)response.StatusCode} {response.ReasonPhrase}";
+            }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Failed to load game details: {ex.Message}";
+            errorMessage = $"Error: {ex.Message}";
         }
         finally
         {
