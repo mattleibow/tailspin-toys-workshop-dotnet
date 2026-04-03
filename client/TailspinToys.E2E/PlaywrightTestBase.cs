@@ -25,6 +25,9 @@ public class PlaywrightTestBase : IAsyncLifetime
             BaseURL = BaseUrl
         });
         Page = await context.NewPageAsync();
+        Page.SetDefaultTimeout(15000);
+        Page.SetDefaultNavigationTimeout(30000);
+        Assertions.SetDefaultExpectTimeout(15000);
     }
 
     public async Task DisposeAsync()

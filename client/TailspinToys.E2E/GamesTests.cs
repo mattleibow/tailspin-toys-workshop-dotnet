@@ -10,9 +10,8 @@ public class GamesTests : PlaywrightTestBase
         // Navigate to homepage
         await Page.GotoAsync("/");
 
-        // Verify games grid is visible
-        var gamesGrid = Page.GetByTestId("games-grid");
-        await Expect(gamesGrid).ToBeVisibleAsync();
+        // Wait for games to load (games-grid only renders when data is available)
+        await Page.WaitForSelectorAsync("[data-testid='games-grid']", new() { Timeout = 15000 });
 
         // Verify game cards are displayed
         var gameCards = Page.GetByTestId("game-card");
@@ -29,8 +28,7 @@ public class GamesTests : PlaywrightTestBase
     {
         // Navigate to homepage and wait for games to load
         await Page.GotoAsync("/");
-        var gamesGrid = Page.GetByTestId("games-grid");
-        await Expect(gamesGrid).ToBeVisibleAsync();
+        await Page.WaitForSelectorAsync("[data-testid='games-grid']", new() { Timeout = 15000 });
 
         // Get first game information and click it
         var firstGameCard = Page.GetByTestId("game-card").First;
