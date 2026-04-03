@@ -13,7 +13,7 @@ public class TestGamesRoutes : IDisposable
     private readonly WebApplicationFactory<Program> _factory;
     private readonly HttpClient _client;
 
-    // Test data matching the original Python tests
+    // Test data
     private static readonly Dictionary<string, object>[] TestPublishers =
     [
         new() { ["name"] = "DevGames Inc" },

@@ -8,7 +8,7 @@ public class TestModels : IDisposable
 {
     private readonly TailspinToysContext _db;
 
-    // Test data matching the original Python tests
+    // Test data
     private static readonly Dictionary<string, string> ValidPublisher = new()
     {
         ["name"] = "Test Publisher",
