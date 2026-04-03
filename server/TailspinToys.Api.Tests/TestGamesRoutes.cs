@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -118,6 +119,25 @@ public class TestGamesRoutes : IDisposable
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(data);
         Assert.Equal(TestGames.Length, data.Count);
+
+        for (var i = 0; i < data.Count; i++)
+        {
+            var gameData = data[i];
+            var expectedGame = TestGames[i];
+            var expectedPublisher = TestPublishers[(int)expectedGame["publisher_index"]];
+            var expectedCategory = TestCategories[(int)expectedGame["category_index"]];
+
+            Assert.Equal(expectedGame["title"].ToString(), gameData["title"]?.ToString());
+
+            var publisher = Assert.IsType<JsonElement>(gameData["publisher"]);
+            Assert.Equal(expectedPublisher["name"].ToString(), publisher.GetProperty("name").GetString());
+
+            var category = Assert.IsType<JsonElement>(gameData["category"]);
+            Assert.Equal(expectedCategory["name"].ToString(), category.GetProperty("name").GetString());
+
+            var starRating = Assert.IsType<JsonElement>(gameData["starRating"]);
+            Assert.Equal((double)expectedGame["star_rating"], starRating.GetDouble());
+        }
     }
 
     [Fact]
@@ -157,6 +177,15 @@ public class TestGamesRoutes : IDisposable
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(data);
         Assert.Equal(expectedTitle, data["title"]?.ToString());
+
+        var publisher = Assert.IsType<JsonElement>(data["publisher"]);
+        Assert.Equal(TestPublishers[0]["name"].ToString(), publisher.GetProperty("name").GetString());
+
+        var category = Assert.IsType<JsonElement>(data["category"]);
+        Assert.Equal(TestCategories[0]["name"].ToString(), category.GetProperty("name").GetString());
+
+        var starRating = Assert.IsType<JsonElement>(data["starRating"]);
+        Assert.Equal((double)TestGames[0]["star_rating"], starRating.GetDouble());
     }
 
     [Fact]

@@ -215,7 +215,7 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 [instruction-files]: https://code.visualstudio.com/docs/copilot/copilot-customization
 [csharp-nullable-reference-types]: https://learn.microsoft.com/dotnet/csharp/nullable-references
 [games-endpoints]: ../server/TailspinToys.Api/Routes/GamesRoutes.cs
-[games-tests]: ../server/TailspinToys.Api.Tests/GamesRoutesTests.cs
+[games-tests]: ../server/TailspinToys.Api.Tests/TestGamesRoutes.cs
 [instructions-best-practices]: https://docs.github.com/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/

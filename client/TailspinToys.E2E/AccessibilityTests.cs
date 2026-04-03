@@ -73,8 +73,8 @@ public class AccessibilityTests : PlaywrightTestBase
         // Verify the menu button is focused
         await Expect(menuButton).ToBeFocusedAsync();
 
-        // Open menu by clicking (Blazor Server handles via SignalR)
-        await menuButton.ClickAsync();
+        // Open menu using the keyboard to match the original workshop coverage
+        await Page.Keyboard.PressAsync("Enter");
 
         // Verify menu is visible (no longer has 'hidden' class)
         var menu = Page.Locator("#menu");

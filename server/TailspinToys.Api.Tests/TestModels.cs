@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using TailspinToys.Api;
 using TailspinToys.Api.Models;
@@ -64,6 +65,9 @@ public class TestModels : IDisposable
 
         Assert.False(isValid);
         Assert.Contains(validationResults, r => r.ErrorMessage!.Contains("Game title must be at least 2 characters"));
+
+        var exception = Assert.Throws<ValidationException>(() => _db.SaveChanges());
+        Assert.Contains("Game title must be at least 2 characters", exception.Message);
     }
 
     [Fact]
@@ -83,6 +87,7 @@ public class TestModels : IDisposable
             Category = category,
             StarRating = 4.0
         };
+        _db.Games.Add(game);
 
         var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
         var context = new System.ComponentModel.DataAnnotations.ValidationContext(game);
@@ -90,6 +95,9 @@ public class TestModels : IDisposable
 
         Assert.False(isValid);
         Assert.Contains(validationResults, r => r.ErrorMessage!.Contains("Description must be at least 10 characters"));
+
+        var exception = Assert.Throws<ValidationException>(() => _db.SaveChanges());
+        Assert.Contains("Description must be at least 10 characters", exception.Message);
     }
 
     [Fact]
@@ -129,6 +137,10 @@ public class TestModels : IDisposable
 
         Assert.False(isValid);
         Assert.Contains(validationResults, r => r.ErrorMessage!.Contains("Publisher name must be at least 2 characters"));
+
+        _db.Publishers.Add(publisher);
+        var exception = Assert.Throws<ValidationException>(() => _db.SaveChanges());
+        Assert.Contains("Publisher name must be at least 2 characters", exception.Message);
     }
 
     [Fact]
@@ -142,6 +154,10 @@ public class TestModels : IDisposable
 
         Assert.False(isValid);
         Assert.Contains(validationResults, r => r.ErrorMessage!.Contains("Category name must be at least 2 characters"));
+
+        _db.Categories.Add(category);
+        var exception = Assert.Throws<ValidationException>(() => _db.SaveChanges());
+        Assert.Contains("Category name must be at least 2 characters", exception.Message);
     }
 
     [Fact]

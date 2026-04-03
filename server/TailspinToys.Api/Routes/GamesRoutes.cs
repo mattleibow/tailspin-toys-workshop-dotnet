@@ -15,6 +15,7 @@ public static class GamesRoutes
             var games = await db.Games
                 .Include(g => g.Publisher)
                 .Include(g => g.Category)
+                .OrderBy(g => g.Id)
                 .ToListAsync();
 
             return Results.Ok(games.Select(g => g.ToDict()));

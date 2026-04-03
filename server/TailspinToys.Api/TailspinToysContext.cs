@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using TailspinToys.Api.Models;
 
@@ -13,6 +14,18 @@ public class TailspinToysContext : DbContext
     public DbSet<Game> Games => Set<Game>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Publisher> Publishers => Set<Publisher>();
+
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        ValidatePendingEntities();
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+        ValidatePendingEntities();
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -38,5 +51,21 @@ public class TailspinToysContext : DbContext
             entity.ToTable("publishers");
             entity.HasIndex(p => p.Name).IsUnique();
         });
+    }
+
+    private void ValidatePendingEntities()
+    {
+        foreach (var entry in ChangeTracker.Entries()
+                     .Where(e => e.State is EntityState.Added or EntityState.Modified))
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(entry.Entity);
+
+            if (!Validator.TryValidateObject(entry.Entity, validationContext, validationResults, validateAllProperties: true))
+            {
+                var firstError = validationResults.FirstOrDefault()?.ErrorMessage ?? "Validation failed.";
+                throw new ValidationException(firstError);
+            }
+        }
     }
 }

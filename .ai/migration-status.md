@@ -4,6 +4,16 @@
 
 ## Final Validation (April 2026)
 
+### Deep parity sweep follow-up
+- ✅ Docs site links now point at `tailspin-toys-workshop-dotnet/tree/dotnet-workshop`
+- ✅ Workshop broken test reference fixed (`TestGamesRoutes.cs`)
+- ✅ Dark theme root restored with `<html class="dark">`
+- ✅ Loading skeleton and Game Details fallback aligned more closely with the original UI
+- ✅ `launchSettings.json` now uses the workshop port `4321`
+- ✅ `setup-env` scripts now install Playwright browsers for clean-clone E2E runs
+- ✅ Dependabot now also tracks GitHub Actions updates
+- ✅ Backend route/model tests strengthened to match original nested JSON and validation behavior more closely
+
 ### Tests
 - ✅ 12/12 backend xUnit tests passing
 - ✅ 21/21 E2E C# Playwright tests passing
@@ -50,6 +60,7 @@
 ## Key Technical Decisions
 - Blazor Interactive Server (not WASM) — uses SignalR for interactivity
 - Tailwind CSS via CDN `<script src="https://cdn.tailwindcss.com">` — no Node dependency
+- Known tradeoff: CDN Tailwind can cause minor navigation FOUC/flicker, but this was kept intentionally for workshop simplicity after validating the static CSS alternative
 - EF Core InMemory for test isolation, SQLite for production
 - Auto-seed database in Program.cs on startup
 - Random(42) fixed seed for consistent star ratings

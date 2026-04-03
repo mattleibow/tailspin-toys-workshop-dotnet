@@ -6,6 +6,9 @@
 Three parallel comparison agents reviewed every file in both repos. All identified
 discrepancies have been resolved in the latest commit.
 
+Final follow-up sweep also resolved the remaining parity nits around docs links,
+launch settings, setup scripts, dark theme activation, and closer test assertions.
+
 ---
 
 ## Workshop Docs (10 files)
