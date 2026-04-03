@@ -20,10 +20,17 @@ public static class SeedDatabase
 
         var csvPath = Path.Combine(AppContext.BaseDirectory, "Utils", "SeedData", "games.csv");
 
-        // If not found in bin directory, try relative to project root
+        // If not found in bin directory, try relative to current working directory
         if (!File.Exists(csvPath))
         {
             csvPath = Path.Combine(Directory.GetCurrentDirectory(), "Utils", "SeedData", "games.csv");
+        }
+
+        // Try project directory (for dotnet run)
+        if (!File.Exists(csvPath))
+        {
+            var assemblyDir = Path.GetDirectoryName(typeof(SeedDatabase).Assembly.Location) ?? "";
+            csvPath = Path.Combine(assemblyDir, "Utils", "SeedData", "games.csv");
         }
 
         var random = new Random(42); // Fixed seed for consistency

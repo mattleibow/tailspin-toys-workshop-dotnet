@@ -1,8 +1,27 @@
 # Tailspin Toys Workshop Migration: Node/Python → .NET 10
 
-## Overview
-Migrating the Tailspin Toys Copilot CLI workshop from Flask+Astro/Svelte to .NET 10 + Blazor.
-The workshop teaches GitHub Copilot CLI features using a game crowdfunding platform.
+## Status: ✅ COMPLETE
+
+## Validation Results
+- ✅ All 12 backend tests passing (xUnit)
+- ✅ API live-tested: 21 games seeded, GET /api/games and GET /api/games/{id} working
+- ✅ Blazor frontend builds and runs on port 4321
+- ✅ All 10 workshop files (English) created and adapted
+- ✅ 14 workshop images copied
+- ✅ All 8 scripts created (4 .sh + 4 .ps1)
+- ✅ All GitHub config files present (copilot-instructions, agents, skills, workflows, etc.)
+- ✅ All data-testid attributes match for e2e tests
+- ✅ Seed data (games.csv) byte-identical to original
+- ✅ Docs site files present
+- ✅ No stale Python/Flask/Svelte/Astro references in workshop content
+- ✅ DevContainer configured for .NET 10
+
+## Decisions Made
+- Blazor Interactive Server (not WASM) for frontend
+- Tailwind CSS via CDN (no Node dependency)
+- E2E tests kept as TypeScript/Playwright (language-agnostic UI tests)
+- Localized content (es/, pt_BR/) excluded per user request (English only)
+- API on port 5100, Frontend on port 4321 (matching original)
 
 ## Architecture Mapping
 

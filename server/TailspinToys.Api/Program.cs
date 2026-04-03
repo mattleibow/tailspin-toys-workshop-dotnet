@@ -6,7 +6,8 @@ using TailspinToys.Api.Utils;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure the database
-var projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
+var serverDir = builder.Environment.ContentRootPath;
+var projectRoot = Path.GetFullPath(Path.Combine(serverDir, "..", ".."));
 var dataDir = Path.Combine(projectRoot, "data");
 Directory.CreateDirectory(dataDir);
 var dbPath = Path.Combine(dataDir, "tailspin-toys.db");
