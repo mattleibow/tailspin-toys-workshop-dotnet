@@ -59,8 +59,8 @@ await Expect(Page).ToHaveURLAsync("/game/1");
 - `games-grid` - Games grid container
 - `game-card` - Individual game card
 - `game-title` - Game title in card
-- `game-category` - Category badge
-- `game-publisher` - Publisher badge
+- `game-category` - Category badge (conditional when data is present)
+- `game-publisher` - Publisher badge (conditional when data is present)
 - `game-description` - Game description
 - `game-details` - Game details container
 - `game-details-title` - Game details title

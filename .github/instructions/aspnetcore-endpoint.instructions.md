@@ -71,3 +71,15 @@ app.MapGamesRoutes();
 - Use `ToDict()` methods on models for JSON serialization
 - Return appropriate HTTP status codes
 - Use route constraints (e.g., `{id:int}`) for type safety
+
+## Required Testing
+
+- All endpoints need integration tests per [dotnet-tests.instructions.md](./dotnet-tests.instructions.md)
+- Run: [scripts/run-server-tests.sh](../../scripts/run-server-tests.sh) (or [scripts/run-server-tests.ps1](../../scripts/run-server-tests.ps1) on Windows)
+- All tests must pass before commit
+
+## Registration & References
+
+- Register routes in [server/TailspinToys.Api/Program.cs](../../server/TailspinToys.Api/Program.cs)
+- Example: [server/TailspinToys.Api/Routes/GamesRoutes.cs](../../server/TailspinToys.Api/Routes/GamesRoutes.cs)
+- Tests: [server/TailspinToys.Api.Tests/TestGamesRoutes.cs](../../server/TailspinToys.Api.Tests/TestGamesRoutes.cs)

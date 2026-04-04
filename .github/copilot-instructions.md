@@ -33,6 +33,7 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 ### Code formatting requirements
 
 - When writing C#, you must use type annotations for return values and method parameters.
+- Use nullable reference types when appropriate so generated code clearly communicates nullability expectations.
 - Follow C# naming conventions (PascalCase for public members, camelCase for locals)
 
 ### C# and ASP.NET Core Patterns

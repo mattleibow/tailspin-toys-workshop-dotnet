@@ -37,11 +37,20 @@
         try
         {
             var client = HttpClientFactory.CreateClient("API");
-            games = await client.GetFromJsonAsync<Game[]>("api/games");
+            var response = await client.GetAsync("api/games");
+
+            if (response.IsSuccessStatusCode)
+            {
+                games = await response.Content.ReadFromJsonAsync<Game[]>();
+            }
+            else
+            {
+                errorMessage = $"Failed to fetch data: {(int)response.StatusCode} {response.ReasonPhrase}";
+            }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Failed to load games: {ex.Message}";
+            errorMessage = $"Error: {ex.Message}";
         }
         finally
         {

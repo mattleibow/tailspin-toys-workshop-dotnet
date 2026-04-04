@@ -23,6 +23,12 @@ jobs:
       - name: Restore .NET dependencies
         run: dotnet restore
 
+      # Node.js setup - required for Copilot CLI and npx-based MCP servers
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
       # Build E2E test project to generate Playwright script
       - name: Build E2E tests
         run: dotnet build client/TailspinToys.E2E/

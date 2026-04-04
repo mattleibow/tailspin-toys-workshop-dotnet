@@ -41,6 +41,17 @@ Each piece of feedback should be a single sentence. If more details are needed, 
 - Check for security vulnerabilities and data handling issues
 - Ensure code follows established project patterns
 
+### Use Available Tools
+Before reviewing, leverage MCP tools to validate code:
+
+**For Blazor Components:**
+- Use the Microsoft Learn MCP to verify current Blazor and ASP.NET Core guidance
+- Check render-mode usage, component parameters, and accessibility patterns
+
+**For Browser and E2E Validation:**
+- Use the Playwright MCP to inspect UI behavior and verify participant-visible flows
+- Confirm `data-testid` usage, navigation behavior, and accessible interactions
+
 ### Run tests
 
 Before performing the review, run both the unit and e2e tests. Add those results to the output following the pattern indicated above.

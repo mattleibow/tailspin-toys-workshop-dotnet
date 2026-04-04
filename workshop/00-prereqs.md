@@ -50,7 +50,7 @@ code .
 > If you chose Option A, you'll return to the codespace in a future exercise. For the time being, leave it open in a tab in your browser.
 
 > [!NOTE]
-> This workshop is built to run inside of a codespace or container. This ensures the environment you're working in has all of the necessary prerequisites installed and you'll have a smooth experience. If you wish to run the workshop locally on your system, you will need the .NET 10 SDK installed, as well as Visual Studio Code.
+> This workshop is built to run inside of a codespace or container. This ensures the environment you're working in has all of the necessary prerequisites installed and you'll have a smooth experience. If you wish to run the workshop locally on your system, you will need the .NET 10 SDK, Node.js 22 or higher, and Visual Studio Code installed.
 
 ## Summary
 
