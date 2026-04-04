@@ -8,7 +8,7 @@ Tailspin Toys is a nascent organization with a website that's lacking in many fe
 
 In this exercise, you will learn how to:
 
-- install GitHub Copilot CLI using npm.
+- install GitHub Copilot CLI using one of the supported installation methods.
 - authenticate with your GitHub account.
 - verify the installation.
 
@@ -22,21 +22,38 @@ Before installing Copilot CLI, you need to open a terminal window in VS Code.
 
 ## Install Copilot CLI
 
-GitHub Codespaces come with Node.js pre-installed, so you can use npm to install Copilot CLI globally.
+GitHub Copilot CLI can be installed in several ways. If you are in Codespaces, npm is convenient because Node.js is typically already installed. If you are working locally and prefer not to install Node.js just for Copilot CLI, use Homebrew on macOS/Linux or WinGet on Windows instead.
 
-1. In the terminal, verify Node.js is installed and meets the version requirement:
+> [!NOTE]
+> In this workshop, **Node.js is used for Copilot tooling**, not for the Tailspin Toys application itself. We use npm here because it works consistently in Codespaces, and Exercise 3 later uses the Playwright MCP server via `npx @playwright/mcp@latest`. The web app and the repo's Playwright E2E tests remain **C# / xUnit** based.
+
+1. Choose the install method that matches your environment:
+
+   **macOS / Linux with Homebrew**
+
+   ```bash
+   brew install copilot-cli
+   ```
+
+   **Windows with WinGet**
+
+   ```powershell
+   winget install GitHub.Copilot
+   ```
+
+   **Codespaces or any environment with Node.js / npm**
+
+   ```bash
+   npm install -g @github/copilot
+   ```
+
+2. If you are installing Copilot CLI via npm, verify Node.js is installed and meets the version requirement:
 
    ```bash
    node --version
    ```
 
    You should see version 22 or higher (e.g., `v22.x.x`).
-
-2. Install Copilot CLI globally using npm:
-
-   ```bash
-   npm install -g @github/copilot
-   ```
 
 3. Verify the installation by checking the version:
 
@@ -47,7 +64,7 @@ GitHub Codespaces come with Node.js pre-installed, so you can use npm to install
    You should see the version number displayed (e.g., `v0.0.393`).
 
 > [!TIP]
-> If you encounter permission errors, you may need to use `sudo npm install -g @github/copilot` on some systems. However, this shouldn't be necessary in GitHub Codespaces.
+> If you prefer, you can also use the official Copilot CLI install script. If you encounter permission errors with npm, you may need to use `sudo npm install -g @github/copilot` on some systems. However, this shouldn't be necessary in GitHub Codespaces.
 
 ## Authenticate with GitHub
 
@@ -106,7 +123,7 @@ Let's make sure Copilot CLI is properly installed and connected.
 
 Congratulations! You've successfully installed and authenticated GitHub Copilot CLI. You learned how to:
 
-- install Copilot CLI using npm.
+- install Copilot CLI using one of the supported installation methods.
 - authenticate with your GitHub account.
 - trust a directory for Copilot CLI to work with.
 - verify the installation is working correctly.

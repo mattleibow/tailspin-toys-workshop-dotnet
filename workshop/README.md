@@ -22,11 +22,18 @@ By the end of this workshop, you will be able to:
 Before attending this workshop, please ensure you have:
 
 - [ ] A GitHub account with an active **Copilot Pro, Pro+, Business, or Enterprise** subscription
+- [ ] Permission to create and work in **your own copy of the template repository** in a user or organization where you can create issues, branches, commits, and pull requests
+- [ ] A web browser and internet access to GitHub and the external services used in the workshop
 - [ ] Basic familiarity with terminal/command line operations
-- [ ] Git installed and configured
+- [ ] Either:
+  - **GitHub Codespaces access** (recommended), or
+  - a local environment with **.NET 10 SDK**, **Git**, **Node.js 22+**, and **Visual Studio Code or VS Code Insiders**
 
 > [!NOTE]
 > If you are using Copilot Business or Copilot Enterprise, ensure your admin has enabled Copilot CLI for use.
+
+> [!TIP]
+> Node.js is only needed for the **Copilot CLI / MCP tooling** flow in this workshop - specifically installing Copilot CLI with npm and running the Playwright MCP server. The Tailspin Toys app and the repository's Playwright E2E tests are still **.NET / C# / xUnit** based.
 
 ## The Scenario: Tailspin Toys
 
