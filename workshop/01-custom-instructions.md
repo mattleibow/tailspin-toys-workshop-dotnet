@@ -71,7 +71,7 @@ Let's start by exploring the instructions files created for this project. You'll
 2. Open **.github/copilot-instructions.md**.
 3. Explore the file, noting the brief description of the project and sections for **Code standards**, **Scripts** and **GitHub Actions Workflows**. These are applicable to any interactions you'd have with Copilot, are robust, and provide clear guidance on what you're doing and how you want to accomplish it.
 4. Open **.github/instructions**, and explore the files contained inside it. Note there are instructions for Blazor files, ASP.NET Core endpoints, the various tests, and others.
-5. Open **.github/instructions/dotnet-tests.instructions.md**. Make note of the `applyTo` section. This sets the path, relative to the root of the project, which determines which files the instructions apply to. In this case, any C# files in the **server/TailspinToys.Api.Tests** folder will match the slug.
+5. Open **.github/instructions/dotnet-tests.instructions.md**. Make note of the `applyTo` section. This sets the path, relative to the root of the project, which determines which files the instructions apply to. In this case, the pattern matches C# files in test folders such as **server/TailspinToys.Api.Tests**.
 6. Note the instructions specific to creating xUnit tests for this project.
 7. Finally, open **.github/instructions/aspnetcore-endpoint.instructions.md**, and scroll to the bottom of the file. Note the links to other instructions files and existing files in the project. This allows you to both breakdown larger instruction sets into smaller, reusable files, and to point to examples Copilot should consider when generating code. Note these paths are relative to the instructions file rather than the root of the project.
 
@@ -84,7 +84,7 @@ To see the impact of custom instructions, you'll start by sending a prompt with 
 
 1. Return to your codespace.
 2. Close any files open in the codespace.
-3. Open `server/TailspinToys.Api/Routes/PublishersRoutes.cs`, an empty file.
+3. Open `server/TailspinToys.Api/Routes/PublishersRoutes.cs`, a placeholder file.
 4. If **Copilot chat** is not already open, open it by selecting the Copilot icon towards the top of your codespace.
 
    ![Chat icon in VS Code](./images/1-chat-icon.png)
@@ -171,7 +171,7 @@ From this section, you explored how the custom instructions file has provided Co
 
 Our focus in the last two sets of steps was on **copilot-instructions.md**, the global instructions file used for all chat requests for Copilot Chat, Copilot Coding Agent (CCA), and Copilot CLI. Now let's explore the impact of a **.instructions** file.
 
-**.instructions** files can contain an `applyTo` setting in its frontmatter, which allows you to specify a slug or path. Copilot will utilize these instructions whenever it works on a file which matches the slug. In our case, we have an instructions file for .NET tests defined at **.github/instructions/dotnet-tests.instructions.md**, which will be used by Copilot for any files which match the pattern **server/TailspinToys.Api.Tests/\*.cs**.
+**.instructions** files can contain an `applyTo` setting in its frontmatter, which allows you to specify a slug or path. Copilot will utilize these instructions whenever it works on a file which matches the slug. In our case, we have an instructions file for .NET tests defined at **.github/instructions/dotnet-tests.instructions.md**, which will be used by Copilot for any files which match the pattern **`**/*Tests*/**/*.cs`**.
 
 > [!NOTE]
 > There's a chance Copilot already generated test code in the prior exercise, so you might be looking at the same code again. To ensure we can see the behavior, we're going to take a moment, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
@@ -214,14 +214,14 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 
 [instruction-files]: https://code.visualstudio.com/docs/copilot/copilot-customization
 [csharp-nullable-reference-types]: https://learn.microsoft.com/dotnet/csharp/nullable-references
-[games-endpoints]: ../server/TailspinToys.Api/Routes/GamesRoutes.cs
-[games-tests]: ../server/TailspinToys.Api.Tests/TestGamesRoutes.cs
+[games-endpoints]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/server/TailspinToys.Api/Routes/GamesRoutes.cs
+[games-tests]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/server/TailspinToys.Api.Tests/TestGamesRoutes.cs
 [instructions-best-practices]: https://docs.github.com/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/
 [awesome-copilot]: https://github.com/github/awesome-copilot
-[ui-instructions]: ../.github/instructions/tailwindcss.instructions.md
-[blazor-instructions]: ../.github/instructions/blazor.instructions.md
+[ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/tailwindcss.instructions.md
+[blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/blazor.instructions.md
 [img-generate-instructions]: ./images/1-generate-instructions.png
 [img-extensions-updates]: ./images/1-extensions-updates.png
 [img-select-chat-mode]: ./images/1-select-chat-mode.png

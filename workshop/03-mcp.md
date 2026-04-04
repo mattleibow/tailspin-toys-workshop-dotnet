@@ -46,6 +46,9 @@ Because we are working in a workshop environment on a codespace, we will utilize
 
 MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the file directly, or add them through the `/mcp add` command, which is the route you'll take here. As you add each server, or when you start Copilot CLI in the future, they'll automatically be started. 
 
+> [!NOTE]
+> This repository may also include a **.vscode/mcp.json** file for editor-based experiences. That file is separate from Copilot CLI's **~/.copilot/mcp-config.json**. In this exercise you are configuring the CLI.
+
 1. Return to your codespace.
 2. If not already open, open a terminal window by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
 3. If Copilot is already running, stop it by selecting <kbd>Ctrl</kbd>+<kbd>C</kbd> twice.
@@ -76,7 +79,10 @@ MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the
 
 ## Creating a backlog of tasks
 
-Now that you have set up the GitHub MCP server, you can use Copilot Agent mode to create a backlog of tasks for use in the rest of the lab.
+Now that GitHub MCP is already available in Copilot CLI and you've registered the other servers, you can use Copilot Agent mode to create a backlog of tasks for use in the rest of the lab.
+
+> [!IMPORTANT]
+> This exercise assumes you are working in **your own repository created from the template** and that Copilot CLI is authenticated to GitHub with permission to create issues in that repository.
 
 1. Return to your codespace.
 2. If not already open, open a terminal window by utilizing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.

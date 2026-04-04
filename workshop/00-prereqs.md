@@ -46,6 +46,9 @@ cd <repository-name>
 code .
 ```
 
+> [!TIP]
+> If `code .` returns `command not found`, open Visual Studio Code and run **Shell Command: Install 'code' command in PATH** from the Command Palette, or open the cloned folder manually from VS Code.
+
 > [!IMPORTANT]
 > If you chose Option A, you'll return to the codespace in a future exercise. For the time being, leave it open in a tab in your browser.
 

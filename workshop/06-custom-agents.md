@@ -52,7 +52,7 @@ A custom agent has already been created for you for accessibility. Let's review 
 
 ## Using a custom agent in Copilot CLI
 
-You can start a custom agent in Copilot CLI by using the `/agent` command. Let's perform an accessibility pass on our website by first returning to our main branch then starting the agent.
+You can start a custom agent in Copilot CLI by using the `/agent` command. Let's perform an accessibility pass on our website by first returning to the workshop branch and then starting the agent.
 
 1. Return to your codespace.
 2. If not already open, open a terminal window by utilizing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
@@ -62,14 +62,17 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
     copilot --allow-all-tools
     ```
 
-4. Return to the main branch by executing a CLI command from directly inside Copilot by using the following prompt:
+4. Return to the workshop branch by executing a CLI command from directly inside Copilot by using the following prompt:
 
     ```
-    !git checkout main
+    !git checkout dotnet-workshop
     ```
 
 > [!NOTE]
 > Prefixing a prompt with a `!` allows you to execute CLI tools from directly inside Copilot CLI.
+
+> [!IMPORTANT]
+> This exercise assumes you are working in **your own repository created from the template** with the backlog issues from Exercise 3 already created, and that Copilot CLI can open a pull request in that repository.
 
 1. Bring up the list of agents by typing `/agent` in the prompt window in Copilot CLI and selecting <kbd>Enter</kbd>.
 2. Select the **Accessibility agent** from the list of available agents.

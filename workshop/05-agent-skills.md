@@ -59,6 +59,9 @@ Because Tailspin Toys has a set of requirements for creating PRs, they created a
 
 As highlighted previously, skills are automatically invoked by Copilot CLI. As a result, all we need to do is ask Copilot to create a PR!
 
+> [!IMPORTANT]
+> This exercise assumes you are working in **your own repository created from the template** and that Copilot CLI is authenticated to GitHub with permission to create branches and pull requests.
+
 1. Return to your codespace.
 2. If not already open, open a terminal window by utilizing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
 3. If not already running, start Copilot CLI by issuing the following command in the terminal window:
