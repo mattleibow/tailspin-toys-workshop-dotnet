@@ -1,8 +1,9 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TailspinToys.Api;
 using TailspinToys.Api.Models;
@@ -11,6 +12,7 @@ namespace TailspinToys.Api.Tests;
 
 public class TestGamesRoutes : IDisposable
 {
+    private readonly string _dbPath;
     private readonly WebApplicationFactory<Program> _factory;
     private readonly HttpClient _client;
 
@@ -51,24 +53,24 @@ public class TestGamesRoutes : IDisposable
 
     public TestGamesRoutes()
     {
-        var dbName = $"TestDb_{Guid.NewGuid()}";
+        // Use a temp file-based SQLite DB so all connections naturally share the same data.
+        _dbPath = Path.Combine(Path.GetTempPath(), $"TestDb_{Guid.NewGuid()}.db");
+        var connectionString = $"Data Source={_dbPath}";
+
         _factory = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(builder =>
             {
-                builder.ConfigureServices(services =>
-                {
-                    // Remove all DbContext-related registrations
-                    var toRemove = services
-                        .Where(d => d.ServiceType.FullName?.Contains("DbContext") == true
-                                 || d.ServiceType.FullName?.Contains("EntityFramework") == true
-                                 || d.ServiceType.FullName?.Contains("Sqlite") == true)
-                        .ToList();
-                    foreach (var d in toRemove)
-                        services.Remove(d);
+                // Use a non-Development environment so appsettings.Development.json (which sets
+                // SeedDatabase=true) is not loaded — the default of false applies instead.
+                builder.UseEnvironment("Testing");
 
-                    // Add in-memory database for testing
-                    services.AddDbContext<TailspinToysContext>(options =>
-                        options.UseInMemoryDatabase(dbName));
+                // Override the connection string — no service removal needed
+                builder.ConfigureAppConfiguration((context, config) =>
+                {
+                    config.AddInMemoryCollection(new Dictionary<string, string?>
+                    {
+                        ["ConnectionStrings:DefaultConnection"] = connectionString
+                    });
                 });
             });
 
@@ -234,5 +236,14 @@ public class TestGamesRoutes : IDisposable
     {
         _client.Dispose();
         _factory.Dispose();
+        try
+        {
+            if (File.Exists(_dbPath))
+                File.Delete(_dbPath);
+        }
+        catch (IOException)
+        {
+            // Best-effort cleanup; ignore if the file is locked or already deleted
+        }
     }
 }

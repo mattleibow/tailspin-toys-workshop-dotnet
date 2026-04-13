@@ -5,15 +5,13 @@ using TailspinToys.Api.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure the database
-var serverDir = builder.Environment.ContentRootPath;
-var projectRoot = Path.GetFullPath(Path.Combine(serverDir, "..", ".."));
-var dataDir = Path.Combine(projectRoot, "data");
-Directory.CreateDirectory(dataDir);
-var dbPath = Path.Combine(dataDir, "tailspin-toys.db");
-
-builder.Services.AddDbContext<TailspinToysContext>(options =>
-    options.UseSqlite($"Data Source={dbPath}"));
+builder.Services.AddDbContext<TailspinToysContext>((serviceProvider, options) =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection")
+        ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    options.UseSqlite(connectionString);
+});
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -32,11 +30,24 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<TailspinToysContext>();
-    if (db.Database.IsSqlite())
+
+    // Ensure the directory exists for file-based SQLite databases
+    var connectionString = app.Configuration.GetConnectionString("DefaultConnection") ?? "";
+    var dataSource = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder(connectionString).DataSource;
+    if (!string.IsNullOrEmpty(dataSource) && dataSource != ":memory:")
     {
-        db.Database.EnsureCreated();
+        var dbDir = Path.GetDirectoryName(Path.GetFullPath(dataSource));
+        if (!string.IsNullOrEmpty(dbDir))
+            Directory.CreateDirectory(dbDir);
     }
-    SeedDatabase.Seed(db);
+
+    db.Database.EnsureCreated();
+
+    var seedEnabled = app.Configuration.GetValue("SeedDatabase", false);
+    if (seedEnabled)
+    {
+        SeedDatabase.Seed(db);
+    }
 }
 
 app.UseCors();
