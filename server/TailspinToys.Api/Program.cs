@@ -30,6 +30,17 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<TailspinToysContext>();
+
+    // Ensure the directory exists for file-based SQLite databases
+    var connectionString = app.Configuration.GetConnectionString("DefaultConnection") ?? "";
+    var dataSource = new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder(connectionString).DataSource;
+    if (!string.IsNullOrEmpty(dataSource) && dataSource != ":memory:")
+    {
+        var dbDir = Path.GetDirectoryName(Path.GetFullPath(dataSource));
+        if (!string.IsNullOrEmpty(dbDir))
+            Directory.CreateDirectory(dbDir);
+    }
+
     db.Database.EnsureCreated();
 
     var seedEnabled = app.Configuration.GetValue("SeedDatabase", false);

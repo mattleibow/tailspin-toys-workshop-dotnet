@@ -34,6 +34,8 @@ public class TestModels : IDisposable
             .UseSqlite("Data Source=:memory:")
             .Options;
         _db = new TailspinToysContext(options);
+        // Keep the connection open for the lifetime of the test — required for SQLite in-memory
+        // databases so the schema and data persist across multiple operations on this DbContext.
         _db.Database.OpenConnection();
         _db.Database.EnsureCreated();
     }

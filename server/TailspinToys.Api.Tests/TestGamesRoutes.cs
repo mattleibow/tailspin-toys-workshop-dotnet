@@ -232,7 +232,14 @@ public class TestGamesRoutes : IDisposable
     {
         _client.Dispose();
         _factory.Dispose();
-        if (File.Exists(_dbPath))
-            File.Delete(_dbPath);
+        try
+        {
+            if (File.Exists(_dbPath))
+                File.Delete(_dbPath);
+        }
+        catch (IOException)
+        {
+            // Best-effort cleanup; ignore if the file is locked or already deleted
+        }
     }
 }
