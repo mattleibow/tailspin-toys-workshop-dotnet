@@ -36,7 +36,7 @@ You'll start the process of creating the new functionality by utilizing plan mod
     ```
 
 7. Copilot may ask follow-up questions as it builds out its plan. As those arise, answer them based on how you'd build out the functionality.
-8. Once the plan is generated, review the blueprint. You should notice it recommends changes to the backend and frontend, as well as generating tests. You can utilize <kbd>Ctrl</kbd>+<kbd>Y</kbd> to view the full details as a markdown file in VS Code.
+8. Once the plan is generated, review the blueprint. You should notice it recommends changes to the backend and frontend, as well as generating tests. You can utilize <kbd>Ctrl</kbd>+<kbd>Y</kbd> to view the full details as a markdown file.
 9.  If you wish to make any suggestions to the plan Copilot generated, feel free to do so!
 10. Once you're satisfied, switch out of plan mode by selecting <kbd>Shift</kbd>+<kbd>Tab</kbd>.
 11. Tell Copilot to start the work by sending a `start` prompt (or another similar phrase like "Let's do it!") to Copilot.
@@ -49,8 +49,8 @@ You'll start the process of creating the new functionality by utilizing plan mod
 
 All AI code needs to be reviewed before being merged into production. Let's take the time now to explore the files Copilot created and modified in implementing the new feature.
 
-1. Hide the terminal window in your codespace by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
-2. Select **Source Control** in your codespace.
+1. Hide the terminal window in your codespace by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>, or review the changed files using `git diff` in the terminal.
+2. Use **Source Control** in your codespace, or `git status` and `git diff` in the terminal.
 3. Note the files changed. You should see updates to files such as **GamesRoutes.cs**, the Games API, and test files in **TailspinToys.Api.Tests**. You should also see new files created, such as Blazor components for the new filter functionality, and Playwright tests to validate the frontend.
 4. Open the files and explore the changes. In particular, notice the comment sections which have been added. All of this comes from the instructions files you worked on previously in this workshop.
 

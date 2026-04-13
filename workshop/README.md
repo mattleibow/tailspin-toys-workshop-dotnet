@@ -32,7 +32,7 @@ Before attending this workshop, please ensure you have:
 - [ ] Basic familiarity with terminal/command line operations
 - [ ] Either:
   - **GitHub Codespaces access** (recommended), or
-  - a local environment with **.NET 10 SDK**, **Git**, **Node.js 22+**, **GitHub CLI (`gh`)**, and **Visual Studio Code or VS Code Insiders**
+  - a local environment with **.NET 10 SDK**, **Git**, **Node.js 22+**, and **GitHub CLI (`gh`)**
 
 > [!NOTE]
 > If you are using Copilot Business or Copilot Enterprise, ensure your admin has enabled Copilot CLI and Copilot Extensions (including Agentic Workflows) for use.

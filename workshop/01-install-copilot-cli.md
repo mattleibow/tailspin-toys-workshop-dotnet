@@ -26,13 +26,13 @@ In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for 
 4. Select **Reload Window** on any extensions with a **Reload Window** button to reload the codespace.
 5. When prompted by a dialog, select **Reload** to reload the window. This will ensure the latest version is being used.
 
-## Open a terminal in your codespace
+## Open a terminal
 
-Before installing Copilot CLI, you need to open a terminal window in VS Code.
+Before installing Copilot CLI, you need to open a terminal window.
 
-1. Return to your codespace if you're not already there.
-2. Open a terminal window by pressing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
-3. You should see a terminal panel appear at the bottom of your VS Code window.
+1. Return to your codespace or local clone.
+2. Open a terminal window. In a codespace, press <kbd>Ctrl</kbd>+<kbd>\`</kbd>. Locally, use your preferred terminal application.
+3. You should see a terminal prompt ready for commands.
 
 ## Install Copilot CLI
 

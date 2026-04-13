@@ -38,24 +38,21 @@ The creation of the codespace will take several minutes, although it's still far
 
 ### Option B: Clone your Repository locally
 
-If you prefer to work locally rather than in a codespace, clone your own repository and open it in Visual Studio Code or VS Code Insiders:
+If you prefer to work locally rather than in a codespace, clone your own repository and open it in your preferred editor or terminal:
 
 ```bash
 git clone https://github.com/<organization-or-user-name>/<repository-name>.git
 cd <repository-name>
-code .
-# or, if you use VS Code Insiders:
-code-insiders .
 ```
 
 > [!TIP]
-> If `code .` or `code-insiders .` returns `command not found`, open your editor and run **Shell Command: Install 'code' command in PATH** (or the Insiders equivalent) from the Command Palette, or open the cloned folder manually from the editor.
+> You can open the cloned folder in any editor you prefer — VS Code, Vim, or any other editor. The workshop exercises use the terminal exclusively.
 
 > [!IMPORTANT]
 > If you chose Option A, you'll return to the codespace in a future exercise. For the time being, leave it open in a tab in your browser.
 
 > [!NOTE]
-> This workshop is built to run inside of a codespace or container. This ensures the environment you're working in has all of the necessary prerequisites installed and you'll have a smooth experience. If you wish to run the workshop locally on your system, you will need the .NET 10 SDK, Git, and Visual Studio Code or VS Code Insiders installed. **Node.js 22 or higher is only needed for the workshop tooling** - specifically installing GitHub Copilot CLI with npm and running the Playwright MCP server in Exercise 3. The Tailspin Toys app itself, plus the Playwright E2E tests in this repo, are C# / xUnit based.
+> This workshop is built to run inside of a codespace or container. This ensures the environment you're working in has all of the necessary prerequisites installed and you'll have a smooth experience. If you wish to run the workshop locally on your system, you will need the .NET 10 SDK, Git, and a terminal. **Node.js 22 or higher is only needed for the workshop tooling** - specifically installing GitHub Copilot CLI with npm and running the Playwright MCP server in Exercise 3. The Tailspin Toys app itself, plus the Playwright E2E tests in this repo, are C# / xUnit based.
 
 ## Quick checklist for the rest of the workshop
 
@@ -64,7 +61,7 @@ Before moving on, make sure you have:
 - your **own copy of the template repository** and write access to it
 - a browser available for GitHub authentication, Codespaces, and reviewing issues / PRs
 - internet access to GitHub and the workshop services used later, such as npm and Microsoft Learn
-- if working locally: **.NET 10 SDK**, **Git**, **Node.js 22+**, **GitHub CLI (`gh`)**, and **Visual Studio Code or VS Code Insiders**
+- if working locally: **.NET 10 SDK**, **Git**, **Node.js 22+**, and **GitHub CLI (`gh`)**
 
 > [!TIP]
 > **GitHub CLI** is used in Part 2 of the workshop for Agentic Workflows. If you're in a Codespace, it's already installed. If working locally, install it from [cli.github.com](https://cli.github.com/) and authenticate with `gh auth login`. You can also do this later when you reach Exercise 8.
