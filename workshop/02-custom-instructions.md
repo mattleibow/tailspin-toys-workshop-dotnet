@@ -1,4 +1,4 @@
-# Exercise 1 - Providing context to Copilot with instruction files
+# Exercise 2 - Providing context to Copilot with instruction files
 
 Context is key across many aspects of life, and when working with generative AI. If you're performing a task which needs to be completed a particular way, or if a piece of background information is important, you want to ensure Copilot has access to that information. You can use [instruction files][instruction-files] to provide guidance so that Copilot not only understands what you want it to do but also how you want it to be done.
 
@@ -9,7 +9,7 @@ In this exercise, you will learn how to:
 - implement both repository-wide instructions and task-specific instructions.
 
 > [!IMPORTANT]
-> Note that the code generated may diverge from some of the standards you set. AI tools like Copilot are non-deterministic, and may not always provide the same result. The other files in the codebase do not contain XML doc comments or comment headers, which could lead Copilot in another direction. Consistency is key, so making sure that your code follows the established patterns is important. You can always follow-up in chat and ask Copilot to follow your coding standards, which will help guide it in the right direction.
+> Note that the code generated may diverge from some of the standards you set. AI tools like Copilot are non-deterministic, and may not always provide the same result. The other files in the codebase do not contain XML doc comments or comment headers, which could lead Copilot in another direction. Consistency is key, so making sure that your code follows the established patterns is important. You can always follow-up and ask Copilot to follow your coding standards, which will help guide it in the right direction.
 
 ## Scenario
 
@@ -24,11 +24,11 @@ Through the use of instruction files you'll ensure Copilot has the right informa
 
 ## Custom instructions
 
-Custom instructions allow you to provide context and preferences to Copilot chat, so that it can better understand your coding style and requirements. This is a powerful feature that can help you steer Copilot to get more relevant suggestions and code snippets. You can specify your preferred coding conventions, libraries, and even the types of comments you like to include in your code. You can create instructions for your entire repository, or for specific types of files for task-level context.
+Custom instructions allow you to provide context and preferences to Copilot, so that it can better understand your coding style and requirements. This is a powerful feature that can help you steer Copilot to get more relevant suggestions and code snippets. You can specify your preferred coding conventions, libraries, and even the types of comments you like to include in your code. You can create instructions for your entire repository, or for specific types of files for task-level context.
 
 There are two types of instructions files:
 
-- **.github/copilot-instructions.md**, a single instruction file sent to Copilot for **every** chat prompt for the repository. This file should contain project-level information, context which is relevant for most chat requests sent to Copilot. This could include the tech stack being used, an overview of what's being built and best practices, and other global guidance for Copilot.
+- **.github/copilot-instructions.md**, a single instruction file sent to Copilot for **every** prompt for the repository. This file should contain project-level information, context which is relevant for most requests sent to Copilot. This could include the tech stack being used, an overview of what's being built and best practices, and other global guidance for Copilot.
 - **\*.instructions.md** files can be created for specific tasks or file types. You can use **\*.instructions.md** files to provide guidelines for particular languages (like C# or TypeScript), or for tasks like creating a Razor component or a new set of unit tests.
 
 ## Best practices for managing instructions files
@@ -43,25 +43,10 @@ There isn't one specific way to create instructions files, just as there isn't o
 
 > [!TIP]
 > Every project using GitHub Copilot should have a robust collection of instructions files to provide context and best guide code generation. As you explore the instructions files in the project, you may notice there are ones for numerous types of files and tasks, including [UI updates][ui-instructions] and [Blazor][blazor-instructions]. The investment made in instructions files will greatly enhance the quality of code suggestion from Copilot, ensuring it better matches the style and requirements your organization has.
-> 
-> You can even have Copilot aid in generating instructions files by selecting the gear icon for **Configure Chat** in Copilot chat and selecting **Generate Agent Instructions**.
-> 
-> ![Screenshot of option in GitHub Copilot chat with configure chat highlighted and generate agent instructions highlighted][img-generate-instructions]
 >
-> And, if you're looking for templates or a starting point for instructions files, you can explore [awesome-copilot][awesome-copilot], a repository full of instructions files, custom agents, and other resources to help you out! 
-
-## Ensure your codespace is ready
-
-In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for the remainder of the coding exercises in this lab. Let's put the final touches on it before you begin using it.
-
-1. Return to the tab where you started your codespace. If you closed the tab, return to your repository, select **Code** > **Codespaces** and then the name of the codespace.
-2. Select **Extensions** on the workbench on the left side of your codespace.
-
-    ![Screenshot of the extensions window with multiple extensions showing either Update or Reload Window buttons][img-extensions-updates]
-
-3. Select **Update** on any extensions with an **Update** button. Repeat as necessary.
-4. Select **Reload Window** on any extensions with a **Reload Window** button to reload the codespace.
-5. When prompted by a dialog, select **Reload** to reload the window. This will ensure the latest version is being used.
+> You can even have Copilot CLI generate instruction files for you as a starting point by running `/init` inside Copilot CLI.
+>
+> And, if you're looking for templates or a starting point for instructions files, you can explore [awesome-copilot][awesome-copilot], a repository full of instructions files, custom agents, and other resources to help you out!
 
 ## Explore the custom instructions files
 
@@ -77,53 +62,39 @@ Let's start by exploring the instructions files created for this project. You'll
 
 ## Examine the impact of custom instructions
 
-To see the impact of custom instructions, you'll start by sending a prompt with the current version of the files, and see how Copilot pulls those files into context. Then you'll then make some updates, send the same prompt again, and note the difference.
-
-> [!NOTE]
-> We're going to start by utilizing chat in VS Code or your codespace to streamline the process of seeing the impact of updates to instructions to the generated code. Because Copilot CLI utilizes the same instructions paradigm, the same behavior will be experienced there.
+To see the impact of custom instructions, you'll send a prompt with the current version of the files and see how Copilot uses them. Then you'll make some updates, send the same prompt again, and note the difference.
 
 1. Return to your codespace.
-2. Close any files open in the codespace.
-3. Open `server/TailspinToys.Api/Routes/PublishersRoutes.cs`, a placeholder file.
-4. If **Copilot chat** is not already open, open it by selecting the Copilot icon towards the top of your codespace.
+2. If not already open, open a terminal window by pressing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
+3. If not already running, start Copilot CLI by issuing the following command in the terminal window:
 
-   ![Chat icon in VS Code](./images/1-chat-icon.png)
+    ```bash
+    copilot
+    ```
 
-5. Create a new chat session by typing `/clear` into the chat window and selecting <kbd>Enter</kbd> (or <kbd>return</kbd> on a Mac).
-6. Select **Ask** from the modes dropdown.
+4. Send the following prompt to create a new endpoint to return all publishers:
 
-   ![Chat mode selection dialog with Ask mode highlighted][img-select-chat-mode]
+    ```plaintext
+    Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers.
+    ```
 
-7. Set the model to **Claude Sonnet 4.5**.
+5. Copilot explores the project to learn how best to implement the code, and generates suggestions which may include code for `PublishersRoutes.cs`, `Program.cs`, and tests.
 
-    ![Example of selecting the Claude Sonnet 4.5 model][img-select-model]
+> [!TIP]
+> Copilot CLI automatically loads **copilot-instructions.md** as well as any matching **.instructions** files when it reads or generates files in your project. You don't need to do anything special — the instructions are picked up automatically.
 
-> [!NOTE]
-> The workshop is set to use Claude Sonnet 4.5 as its the model tested when creating the workshop. This isn't an indication of preference of one model over another.
-
-8. Send the following prompt to create a new endpoint to return all publishers:
-
-   ```plaintext
-   Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers.
-   ```
-
-9.  Copilot explores the project to learn how best to implement the code, and generates a list of suggestions, which may include code for `PublishersRoutes.cs`, `Program.cs`, and tests to ensure the new code runs correctly.
-10. Note the list references section in the chat window. Expand the list, and take note of the files used for context. They should include **copilot-instructions.md**, as well as **.instructions** files for creating ASP.NET Core endpoints and .NET tests. The former is because **copilot-instructions.md** is included in every request, while the latter is loaded whenever a file matches the slug in the `applyTo` header matter of **.instructions** files.
-
-   ![Screenshot of the references section in Copilot Chat in VS Code][img-references]
-
-11. Explore the code, noticing the generated code includes [nullable reference types][csharp-nullable-reference-types] because, as you'll see, the custom instructions includes the directive to use them.
-12. Notice the generated code **is missing** either an XML doc comment or a comment header - or both!
+6. Explore the code, noticing the generated code includes [nullable reference types][csharp-nullable-reference-types] because, as you'll see, the custom instructions includes the directive to use them.
+7. Notice the generated code **is missing** either an XML doc comment or a comment header — or both!
 
 > [!IMPORTANT]
 > As highlighted previously, GitHub Copilot and LLM tools are probabilistic, not deterministic. As a result, the exact code generated may vary, and there's even a chance it'll abide by your rules without you spelling it out! But to aid consistency in code you should always document anything you want to ensure Copilot should understand about how you want your code generated.
 
 ## Add new repository standards to copilot-instructions.md
 
-As highlighted previously, `copilot-instructions.md` is designed to provide project-level information to Copilot. Let's ensure repository coding standards are documented to improve code suggestions from Copilot chat.
+As highlighted previously, `copilot-instructions.md` is designed to provide project-level information to Copilot. Let's ensure repository coding standards are documented to improve code suggestions.
 
 1. Return to your codespace.
-2. Open `.github/copilot-instructions.md`.
+2. Open `.github/copilot-instructions.md` in your editor.
 3. Locate the **Code formatting requirements** section, which should be near line 35. Note how it contains a note to use nullable reference types. That's why you saw those in the code generated previously.
 4. Add the following lines of markdown right below the note about nullable reference types to instruct Copilot to add comment headers to files and XML doc comments (which should be near line 35):
 
@@ -132,10 +103,14 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
    - Before the namespace declaration or any code, add a comment block to the file that explains its purpose.
    ```
 
-5. Close **copilot-instructions.md**.
-6. Select **New Chat** in Copilot chat to clear the buffer and start a new conversation.
-7. Return to **server/TailspinToys.Api/Routes/PublishersRoutes.cs** to ensure focus is set correctly.
-8. Send the same prompt as before to create the endpoint.
+5. Save and close **copilot-instructions.md**.
+6. Return to the terminal and clear Copilot CLI's context so it picks up the updated instructions:
+
+    ```
+    /clear
+    ```
+
+7. Send the same prompt as before to create the endpoint:
 
    ```plaintext
    Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers.
@@ -160,10 +135,10 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
 
 11. Notice the generated code now includes an XML doc comment as well as a comment block at the top!
 12. Also note how the existing code isn't updated, but of course you could ask Copilot to perform that operation if you so desired!
-13. **Don't implement the suggested changes**, as you'll be doing that in a later exercise.
+13. **Don't accept the suggested changes**, as you'll be implementing features in a later exercise.
 
 > [!NOTE]
-> If you accepted the changes, you can always select the **Undo** button towards the top right of the Copilot chat window.
+> If you accepted the changes, you can always use `git checkout .` to discard uncommitted file changes.
 
 From this section, you explored how the custom instructions file has provided Copilot with the context it needs to generate code that follows the established guidelines.
 
@@ -174,19 +149,22 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
 **.instructions** files can contain an `applyTo` setting in its frontmatter, which allows you to specify a slug or path. Copilot will utilize these instructions whenever it works on a file which matches the slug. In our case, we have an instructions file for .NET tests defined at **.github/instructions/dotnet-tests.instructions.md**, which will be used by Copilot for any files which match the pattern **`**/*Tests*/**/*.cs`**.
 
 > [!NOTE]
-> There's a chance Copilot already generated test code in the prior exercise, so you might be looking at the same code again. To ensure we can see the behavior, we're going to take a moment, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
+> There's a chance Copilot already generated test code in the prior step, so you might be looking at the same code again. To ensure we can see the behavior, we're going to clear context, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
 
-1. Return to your codespace.
-2. Open Copilot Chat if not already open.
-3. Select **New Chat** in Copilot Chat to clear the buffer and start a new conversation.
-4. Send the following prompt to Copilot Chat to ensure tests are generated.
+1. Return to the terminal with Copilot CLI running.
+2. Clear the context to start fresh:
 
-   ```
-   Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers. Also generate the tests for the newly generated endpoint.
-   ```
+    ```
+    /clear
+    ```
 
-5. Note again the references section, and how Copilot includes the **dotnet-tests.instructions.md** file for guidance specific to this type of file.
-6. Explore the generated code for the test. Based on the instructions, it should:
+3. Send the following prompt to ensure tests are generated:
+
+    ```
+    Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers. Also generate the tests for the newly generated endpoint.
+    ```
+
+4. Explore the generated code for the test. Based on the instructions, it should:
     - utilize xUnit with the `[Fact]` or `[Theory]` attribute.
     - use `WebApplicationFactory<Program>` for integration testing.
     - contain both setup and teardown via constructor and `IDisposable`.
@@ -199,9 +177,6 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 - use instruction files to guide Copilot for repetitive or templated tasks.
 - implement both repository-wide instructions and task-specific instructions.
 
-> [!IMPORTANT]
-> If you're using Copilot CLI, you can run `/init` to generate instruction files as a starting point.
-
 ## Resources
 
 - [Instruction files for GitHub Copilot customization][instruction-files]
@@ -213,17 +188,11 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 ---
 
 [instruction-files]: https://code.visualstudio.com/docs/copilot/copilot-customization
+[repository-custom-instructions]: https://docs.github.com/copilot/how-tos/configure-custom-instructions/add-repository-instructions
 [csharp-nullable-reference-types]: https://learn.microsoft.com/dotnet/csharp/nullable-references
-[games-endpoints]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/server/TailspinToys.Api/Routes/GamesRoutes.cs
-[games-tests]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/server/TailspinToys.Api.Tests/TestGamesRoutes.cs
 [instructions-best-practices]: https://docs.github.com/enterprise-cloud@latest/copilot/using-github-copilot/coding-agent/best-practices-for-using-copilot-to-work-on-tasks#adding-custom-instructions-to-your-repository
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/
 [awesome-copilot]: https://github.com/github/awesome-copilot
 [ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/tailwindcss.instructions.md
 [blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/blazor.instructions.md
-[img-generate-instructions]: ./images/1-generate-instructions.png
-[img-extensions-updates]: ./images/1-extensions-updates.png
-[img-select-chat-mode]: ./images/1-select-chat-mode.png
-[img-select-model]: ./images/1-select-model.png
-[img-references]: ./images/1-custom-instructions-references.png
