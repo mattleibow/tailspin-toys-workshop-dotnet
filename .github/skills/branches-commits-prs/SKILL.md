@@ -9,7 +9,7 @@ To ensure good history, all code changes need to be grouped together logically i
 
 ## Branch
 
-Before performing any commits, ensure a branch has been created for the work. This branch must never be `dotnet-workshop`, but should be a branch created specifically for the changes taking place. If no branch is already created, create a new one with a good name based on the changes being made.
+Before performing any commits, ensure a branch has been created for the work. This branch must never be `main`, but should be a branch created specifically for the changes taking place. If no branch is already created, create a new one with a good name based on the changes being made.
 
 ## Commits
 

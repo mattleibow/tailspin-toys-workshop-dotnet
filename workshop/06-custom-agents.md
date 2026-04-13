@@ -65,7 +65,7 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
 4. Return to the workshop branch by executing a CLI command from directly inside Copilot by using the following prompt:
 
     ```
-    !git checkout dotnet-workshop
+    !git checkout main
     ```
 
 > [!NOTE]
