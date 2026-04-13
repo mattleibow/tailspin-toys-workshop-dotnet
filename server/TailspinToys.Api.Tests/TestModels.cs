@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-using TailspinToys.Api;
 using TailspinToys.Api.Models;
 
 namespace TailspinToys.Api.Tests;
@@ -32,9 +31,10 @@ public class TestModels : IDisposable
     public TestModels()
     {
         var options = new DbContextOptionsBuilder<TailspinToysContext>()
-            .UseInMemoryDatabase($"TestModelsDb_{Guid.NewGuid()}")
+            .UseSqlite("Data Source=:memory:")
             .Options;
         _db = new TailspinToysContext(options);
+        _db.Database.OpenConnection();
         _db.Database.EnsureCreated();
     }
 

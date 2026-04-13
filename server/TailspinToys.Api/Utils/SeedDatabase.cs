@@ -11,10 +11,6 @@ public static class SeedDatabase
         if (db.Games.Any())
             return;
 
-        // Only seed from CSV when using a real database (not in-memory for tests)
-        if (!db.Database.IsSqlite())
-            return;
-
         var categories = new Dictionary<string, Category>();
         var publishers = new Dictionary<string, Publisher>();
 
