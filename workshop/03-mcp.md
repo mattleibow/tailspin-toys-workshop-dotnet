@@ -24,7 +24,7 @@ These tools and resources are accessed through an MCP server, which acts as a br
 
 A couple of popular existing MCP servers are:
 
-- **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests. **The GitHub MCP server is automatically available in Copilot CLI.**
+- **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests. **The GitHub MCP server is automatically available in Copilot CLI.** By default it runs in read-only mode; to enable write operations (such as creating issues or pull requests), you must start Copilot CLI with the `--enable-all-github-mcp-tools` flag.
 - **[Playwright MCP Server][playwright-mcp-server]**: This server provides browser automation capabilities using Playwright. It allows the AI agent to perform actions such as navigating to web pages, filling out forms, and clicking buttons. This is a separate Node-based MCP tool for Copilot CLI browser automation; it is **not** the same as the C# / xUnit Playwright tests used in this repository.
 - **[Microsoft Learn MCP Server][microsoft-learn-mcp-server]**: This server enables clients like GitHub Copilot and other AI agents to bring trusted and up-to-date information directly from Microsoft's official documentation. It allows to search through documentation, fetch a complete article, and search through code samples.
 
@@ -42,6 +42,9 @@ As an agent, Copilot CLI will often need to execute various commands, such as ac
 
 Because we are working in a workshop environment on a codespace, we will utilize `--allow-all-tools` to streamline the workshop.
 
+> [!TIP]
+> Note that `--allow-all-tools` and `--yolo` do **not** enable write operations for the built-in GitHub MCP server. To allow Copilot to create issues, pull requests, and other write operations via GitHub MCP, you must also pass `--enable-all-github-mcp-tools`.
+
 ## Adding MCP servers to Copilot CLI
 
 MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the file directly, or add them through the `/mcp add` command, which is the route you'll take here. As you add each server, or when you start Copilot CLI in the future, they'll automatically be started. 
@@ -52,10 +55,10 @@ MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the
 1. Return to your codespace.
 2. If not already open, open a terminal window by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
 3. If Copilot is already running, stop it by selecting <kbd>Ctrl</kbd>+<kbd>C</kbd> twice.
-4. Start Copilot by issuing the following command in the terminal window:
+4. The built-in GitHub MCP server is read-only by default. To enable write operations (like creating issues later in this exercise), start Copilot with the `--enable-all-github-mcp-tools` flag:
 
     ```bash
-    copilot --allow-all-tools
+    copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
 5. Inside Copilot CLI, use the following command to start the add MCP server interface:
@@ -89,10 +92,10 @@ Now that GitHub MCP is already available in Copilot CLI and you've registered th
 3. If not already running, start Copilot CLI by issuing the following command in the terminal window:
 
     ```bash
-    copilot --allow-all-tools
+    copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
-4. If already running, clear Copilot's context by sending the `/clear` command in the prompt.
+4. If already running, restart Copilot's context by sending the `/restart` command in the prompt.
 5. Type or paste the following prompt to create the issues you'll be working on in the lab:
 
     ```markdown
