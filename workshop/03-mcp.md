@@ -42,6 +42,9 @@ As an agent, Copilot CLI will often need to execute various commands, such as ac
 
 Because we are working in a workshop environment on a codespace, we will utilize `--allow-all-tools` to streamline the workshop.
 
+> [!TIP]
+> Note that `--allow-all-tools` and `--yolo` do **not** enable write operations for the built-in GitHub MCP server. To allow Copilot to create issues, pull requests, and other write operations via GitHub MCP, you must also pass `--enable-all-github-mcp-tools`.
+
 ## Adding MCP servers to Copilot CLI
 
 MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the file directly, or add them through the `/mcp add` command, which is the route you'll take here. As you add each server, or when you start Copilot CLI in the future, they'll automatically be started. 
