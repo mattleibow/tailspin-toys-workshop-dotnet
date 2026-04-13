@@ -1,4 +1,4 @@
-# Exercise 2 - Installing GitHub Copilot CLI
+# Exercise 1 - Installing GitHub Copilot CLI
 
 [GitHub Copilot CLI][about-copilot-cli] is a powerful agentic coding assistant that runs in your terminal, enabling you to explore codebases, generate code, run commands, and interact with external tools - all from the command line.
 
@@ -8,9 +8,23 @@ Tailspin Toys is a nascent organization with a website that's lacking in many fe
 
 In this exercise, you will learn how to:
 
+- ensure your codespace is ready for the workshop.
 - install GitHub Copilot CLI using one of the supported installation methods.
 - authenticate with your GitHub account.
 - verify the installation.
+
+## Ensure your codespace is ready
+
+In a [prior exercise][prereqs-lesson] you launched the codespace you'll use for the remainder of the coding exercises in this lab. Let's put the final touches on it before you begin.
+
+1. Return to the tab where you started your codespace. If you closed the tab, return to your repository, select **Code** > **Codespaces** and then the name of the codespace.
+2. Select **Extensions** on the workbench on the left side of your codespace.
+
+    ![Screenshot of the extensions window with multiple extensions showing either Update or Reload Window buttons][img-extensions-updates]
+
+3. Select **Update** on any extensions with an **Update** button. Repeat as necessary.
+4. Select **Reload Window** on any extensions with a **Reload Window** button to reload the codespace.
+5. When prompted by a dialog, select **Reload** to reload the window. This will ensure the latest version is being used.
 
 ## Open a terminal in your codespace
 
@@ -139,3 +153,5 @@ Congratulations! You've successfully installed and authenticated GitHub Copilot 
 [install-copilot-cli]: https://docs.github.com/copilot/how-tos/set-up/install-copilot-cli
 [about-copilot-cli]: https://docs.github.com/copilot/concepts/agents/about-copilot-cli
 [using-copilot-cli]: https://docs.github.com/copilot/how-tos/use-copilot-agents/use-copilot-cli
+[prereqs-lesson]: ./00-prereqs.md
+[img-extensions-updates]: ./images/1-extensions-updates.png

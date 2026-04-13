@@ -57,8 +57,8 @@ This full-stack application provides an excellent playground for exploring Copil
 | Exercise | Topic | Description |
 |----------|-------|-------------|
 | [0. Prerequisites][ex0] | Setup | Create your repository and codespace |
-| [1. Custom Instructions][ex1] | Context | Learn how instruction files guide Copilot |
-| [2. Installing Copilot CLI][ex2] | Installation | Install and authenticate Copilot CLI |
+| [1. Installing Copilot CLI][ex1] | Installation | Install and authenticate Copilot CLI |
+| [2. Custom Instructions][ex2] | Context | Learn how instruction files guide Copilot |
 | [3. MCP Servers][ex3] | External Tools | Connect to GitHub and other services via MCP |
 | [4. Generating Code][ex4] | Code Generation | Use plan mode and generate features |
 | [5. Agent Skills][ex5] | Skills | Enhance Copilot with specialized skills |
@@ -93,8 +93,8 @@ This full-stack application provides an excellent playground for exploring Copil
 *Happy coding and automating with GitHub Copilot! 🚀🤖*
 
 [ex0]: ./00-prereqs.md
-[ex1]: ./01-custom-instructions.md
-[ex2]: ./02-install-copilot-cli.md
+[ex1]: ./01-install-copilot-cli.md
+[ex2]: ./02-custom-instructions.md
 [ex3]: ./03-mcp.md
 [ex4]: ./04-generating-code.md
 [ex5]: ./05-agent-skills.md
