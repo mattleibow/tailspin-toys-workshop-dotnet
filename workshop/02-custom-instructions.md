@@ -194,5 +194,5 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/
 [awesome-copilot]: https://github.com/github/awesome-copilot
-[ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/tailwindcss.instructions.md
-[blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/dotnet-workshop/.github/instructions/blazor.instructions.md
+[ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/main/.github/instructions/tailwindcss.instructions.md
+[blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/main/.github/instructions/blazor.instructions.md

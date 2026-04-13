@@ -1,11 +1,11 @@
 name: "Run tests"
 
-# Run tests on pull requests to dotnet-workshop and on pushes to dotnet-workshop
+# Run tests on pull requests to main and on pushes to main
 on:
   pull_request:
-    branches: [dotnet-workshop]
+    branches: [main]
   push:
-    branches: [dotnet-workshop]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
