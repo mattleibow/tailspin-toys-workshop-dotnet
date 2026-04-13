@@ -24,7 +24,7 @@ These tools and resources are accessed through an MCP server, which acts as a br
 
 A couple of popular existing MCP servers are:
 
-- **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests. **The GitHub MCP server is automatically available in Copilot CLI.**
+- **[GitHub MCP Server][github-mcp-server]**: This server provides access to a set of APIs for managing your GitHub repositories. It allows the AI agent to perform actions such as creating new repositories, updating existing ones, and managing issues and pull requests. **The GitHub MCP server is automatically available in Copilot CLI.** By default it runs in read-only mode; to enable write operations (such as creating issues or pull requests), you must start Copilot CLI with the `--enable-all-github-mcp-tools` flag.
 - **[Playwright MCP Server][playwright-mcp-server]**: This server provides browser automation capabilities using Playwright. It allows the AI agent to perform actions such as navigating to web pages, filling out forms, and clicking buttons. This is a separate Node-based MCP tool for Copilot CLI browser automation; it is **not** the same as the C# / xUnit Playwright tests used in this repository.
 - **[Microsoft Learn MCP Server][microsoft-learn-mcp-server]**: This server enables clients like GitHub Copilot and other AI agents to bring trusted and up-to-date information directly from Microsoft's official documentation. It allows to search through documentation, fetch a complete article, and search through code samples.
 
@@ -58,24 +58,30 @@ MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the
     copilot --allow-all-tools
     ```
 
-5. Inside Copilot CLI, use the following command to start the add MCP server interface:
+5. The built-in GitHub MCP server is read-only by default. To enable write operations (like creating issues later in this exercise), stop Copilot by selecting <kbd>Ctrl</kbd>+<kbd>C</kbd> twice and relaunch with the additional flag:
+
+    ```bash
+    copilot --allow-all-tools --enable-all-github-mcp-tools
+    ```
+
+6. Inside Copilot CLI, use the following command to start the add MCP server interface:
 
     ```text
     /mcp add
     ```
 
-6. Set the **Server name** to **Playwright** and select <kbd>Tab</kbd>.
-7. Set the **Server type** to **\[1\] Local** and select <kbd>Tab</kbd>.
-8. Set the **Command** to **npx @playwright/mcp@latest**.
-9. Select <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the server.
-10. Select <kbd>A</kbd> to add another server.
-11. Follow steps 5 through 9 to register Microsoft Learn, using the following table:
+7. Set the **Server name** to **Playwright** and select <kbd>Tab</kbd>.
+8. Set the **Server type** to **\[1\] Local** and select <kbd>Tab</kbd>.
+9. Set the **Command** to **npx @playwright/mcp@latest**.
+10. Select <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the server.
+11. Select <kbd>A</kbd> to add another server.
+12. Follow steps 6 through 10 to register Microsoft Learn, using the following table:
 
     | Server Name | Server Type | Command or URL |
     | ----------- | ----------- | -------------- |
     | Microsoft Learn | \[3\] HTTP | `https://learn.microsoft.com/api/mcp` |
 
-12. Once complete, select <kbd>Q</kbd> to exit the interface.
+13. Once complete, select <kbd>Q</kbd> to exit the interface.
 
 ## Creating a backlog of tasks
 
@@ -89,10 +95,10 @@ Now that GitHub MCP is already available in Copilot CLI and you've registered th
 3. If not already running, start Copilot CLI by issuing the following command in the terminal window:
 
     ```bash
-    copilot --allow-all-tools
+    copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
-4. If already running, clear Copilot's context by sending the `/clear` command in the prompt.
+4. If already running, restart Copilot's context by sending the `/restart` command in the prompt.
 5. Type or paste the following prompt to create the issues you'll be working on in the lab:
 
     ```markdown

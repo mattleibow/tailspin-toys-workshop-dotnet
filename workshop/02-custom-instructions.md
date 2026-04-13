@@ -104,10 +104,10 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
    ```
 
 5. Save and close **copilot-instructions.md**.
-6. Return to the terminal and clear Copilot CLI's context so it picks up the updated instructions:
+6. Return to the terminal and restart Copilot CLI so it picks up the updated instructions:
 
     ```
-    /clear
+    /restart
     ```
 
 7. Send the same prompt as before to create the endpoint:
@@ -119,18 +119,22 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
 9.  Notice how the newly generated code includes a comment header at the top of the file which resembles the following:
 
    ```csharp
-   // Publisher API routes for the Tailspin Toys Crowd Funding platform.
-   // This module provides endpoints to retrieve publisher information.
+   // Publishers routes - exposes endpoints for listing and retrieving publisher data.
    ```
 
-10. Notice how the newly generated code includes an XML doc comment inside the method which resembles the following:
+10. Notice how the newly generated code includes XML doc comments on the class and method which resemble the following:
 
    ```csharp
    /// <summary>
-   /// Returns a list of all publishers with their id and name.
+   /// Minimal API route group for publisher-related endpoints.
    /// </summary>
-   /// <param name="db">The database context.</param>
-   /// <returns>A list of publisher objects containing id and name.</returns>
+   public static class PublishersRoutes
+   {
+       /// <summary>
+       /// Registers all publisher routes on the application.
+       /// </summary>
+       /// <param name="app">The <see cref="WebApplication"/> to register routes on.</param>
+       public static void MapPublishersRoutes(this WebApplication app)
    ```
 
 11. Notice the generated code now includes an XML doc comment as well as a comment block at the top!
@@ -152,10 +156,10 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
 > There's a chance Copilot already generated test code in the prior step, so you might be looking at the same code again. To ensure we can see the behavior, we're going to clear context, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
 
 1. Return to the terminal with Copilot CLI running.
-2. Clear the context to start fresh:
+2. Restart Copilot CLI to start fresh:
 
     ```
-    /clear
+    /restart
     ```
 
 3. Send the following prompt to ensure tests are generated:
