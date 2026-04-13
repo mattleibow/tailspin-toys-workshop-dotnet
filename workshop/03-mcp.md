@@ -52,36 +52,30 @@ MCP servers are registered in **~/.copilot/mcp-config.json**. You can update the
 1. Return to your codespace.
 2. If not already open, open a terminal window by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
 3. If Copilot is already running, stop it by selecting <kbd>Ctrl</kbd>+<kbd>C</kbd> twice.
-4. Start Copilot by issuing the following command in the terminal window:
-
-    ```bash
-    copilot --allow-all-tools
-    ```
-
-5. The built-in GitHub MCP server is read-only by default. To enable write operations (like creating issues later in this exercise), stop Copilot by selecting <kbd>Ctrl</kbd>+<kbd>C</kbd> twice and relaunch with the additional flag:
+4. The built-in GitHub MCP server is read-only by default. To enable write operations (like creating issues later in this exercise), start Copilot with the `--enable-all-github-mcp-tools` flag:
 
     ```bash
     copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
-6. Inside Copilot CLI, use the following command to start the add MCP server interface:
+5. Inside Copilot CLI, use the following command to start the add MCP server interface:
 
     ```text
     /mcp add
     ```
 
-7. Set the **Server name** to **Playwright** and select <kbd>Tab</kbd>.
-8. Set the **Server type** to **\[1\] Local** and select <kbd>Tab</kbd>.
-9. Set the **Command** to **npx @playwright/mcp@latest**.
-10. Select <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the server.
-11. Select <kbd>A</kbd> to add another server.
-12. Follow steps 6 through 10 to register Microsoft Learn, using the following table:
+6. Set the **Server name** to **Playwright** and select <kbd>Tab</kbd>.
+7. Set the **Server type** to **\[1\] Local** and select <kbd>Tab</kbd>.
+8. Set the **Command** to **npx @playwright/mcp@latest**.
+9. Select <kbd>Ctrl</kbd>+<kbd>S</kbd> to save the server.
+10. Select <kbd>A</kbd> to add another server.
+11. Follow steps 5 through 9 to register Microsoft Learn, using the following table:
 
     | Server Name | Server Type | Command or URL |
     | ----------- | ----------- | -------------- |
     | Microsoft Learn | \[3\] HTTP | `https://learn.microsoft.com/api/mcp` |
 
-13. Once complete, select <kbd>Q</kbd> to exit the interface.
+12. Once complete, select <kbd>Q</kbd> to exit the interface.
 
 ## Creating a backlog of tasks
 
