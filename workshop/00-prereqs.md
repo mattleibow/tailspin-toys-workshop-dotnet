@@ -64,7 +64,10 @@ Before moving on, make sure you have:
 - your **own copy of the template repository** and write access to it
 - a browser available for GitHub authentication, Codespaces, and reviewing issues / PRs
 - internet access to GitHub and the workshop services used later, such as npm and Microsoft Learn
-- if working locally: **.NET 10 SDK**, **Git**, **Node.js 22+**, and **Visual Studio Code or VS Code Insiders**
+- if working locally: **.NET 10 SDK**, **Git**, **Node.js 22+**, **GitHub CLI (`gh`)**, and **Visual Studio Code or VS Code Insiders**
+
+> [!TIP]
+> **GitHub CLI** is used in Part 2 of the workshop for Agentic Workflows. If you're in a Codespace, it's already installed. If working locally, install it from [cli.github.com](https://cli.github.com/) and authenticate with `gh auth login`. You can also do this later when you reach Exercise 8.
 
 > [!IMPORTANT]
 > Later exercises create **GitHub issues**, **branches**, **pull requests**, and optionally a **gist**. These steps work best when you are in your own repository created from the template and your GitHub account or organization allows those operations.

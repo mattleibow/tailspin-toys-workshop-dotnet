@@ -1,6 +1,11 @@
 # Tailspin Toys
 
-This repository contains the project for a guided workshop to explore GitHub Copilot CLI. The project is a website for a fictional game crowd-funding company, with an [ASP.NET Core](https://learn.microsoft.com/aspnet/core/) backend using [Entity Framework Core](https://learn.microsoft.com/ef/core/) and [Blazor](https://learn.microsoft.com/aspnet/core/blazor/) frontend with [Tailwind CSS](https://tailwindcss.com/) for styling.
+This repository contains the project for a guided workshop to explore GitHub Copilot CLI and Agentic Workflows. The project is a website for a fictional game crowd-funding company, with an [ASP.NET Core](https://learn.microsoft.com/aspnet/core/) backend using [Entity Framework Core](https://learn.microsoft.com/ef/core/) and [Blazor](https://learn.microsoft.com/aspnet/core/blazor/) frontend with [Tailwind CSS](https://tailwindcss.com/) for styling.
+
+The workshop is split into two parts:
+
+- **Part 1: Building with Copilot CLI** — Learn to use custom instructions, MCP servers, code generation, agent skills, and custom agents to build features for the Tailspin Toys app.
+- **Part 2: Automating with Agentic Workflows** — Create scheduled workflows and ChatOps slash commands using `gh aw` to automate your development lifecycle.
 
 ## Repository setup
 
