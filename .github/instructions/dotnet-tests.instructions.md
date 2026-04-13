@@ -11,7 +11,7 @@ Use xUnit with `WebApplicationFactory` for integration tests, plain `DbContext` 
 
 ### Database Strategy
 
-Tests override `ConnectionStrings:DefaultConnection` via `ConfigureAppConfiguration` and set `SeedDatabase` to `false` to skip production CSV seeding. No service removal or replacement is needed — both production and test use the SQLite provider.
+Tests override `ConnectionStrings:DefaultConnection` via `ConfigureAppConfiguration` to point at a test-specific database. No service removal or replacement is needed — both production and test use the SQLite provider.
 
 - **Route/integration tests**: Use a temp file-based SQLite DB (`Data Source={tempPath}`) with a unique path per test instance. Delete the file in `Dispose()`. File-based DBs are needed because `WebApplicationFactory` opens multiple connections (one per request scope), and they must all see the same data.
 - **Model/unit tests**: Use `Data Source=:memory:` with `OpenConnection()` to hold the connection open. Works because there's only a single `DbContext` instance.
@@ -39,13 +39,16 @@ public class TestExampleRoutes : IDisposable
         _factory = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(builder =>
             {
+                // Use a non-Development environment so appsettings.Development.json is not
+                // loaded — this ensures SeedDatabase defaults to false.
+                builder.UseEnvironment("Testing");
+
                 // Override the connection string — no service removal needed
                 builder.ConfigureAppConfiguration((context, config) =>
                 {
                     config.AddInMemoryCollection(new Dictionary<string, string?>
                     {
-                        ["ConnectionStrings:DefaultConnection"] = connectionString,
-                        ["SeedDatabase"] = "false"
+                        ["ConnectionStrings:DefaultConnection"] = connectionString
                     });
                 });
             });

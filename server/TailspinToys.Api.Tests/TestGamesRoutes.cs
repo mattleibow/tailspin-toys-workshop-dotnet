@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,13 +60,16 @@ public class TestGamesRoutes : IDisposable
         _factory = new WebApplicationFactory<Program>()
             .WithWebHostBuilder(builder =>
             {
+                // Use a non-Development environment so appsettings.Development.json (which sets
+                // SeedDatabase=true) is not loaded — the default of false applies instead.
+                builder.UseEnvironment("Testing");
+
                 // Override the connection string — no service removal needed
                 builder.ConfigureAppConfiguration((context, config) =>
                 {
                     config.AddInMemoryCollection(new Dictionary<string, string?>
                     {
-                        ["ConnectionStrings:DefaultConnection"] = connectionString,
-                        ["SeedDatabase"] = "false"
+                        ["ConnectionStrings:DefaultConnection"] = connectionString
                     });
                 });
             });
