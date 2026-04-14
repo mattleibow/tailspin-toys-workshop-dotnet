@@ -32,7 +32,7 @@ Each skill is defined as a folder with a name. Each folder then contains a **SKI
 
 ```yaml
 ---
-name: branching-commits-prs
+name: branches-commits-prs
 description: All changes to the repository must be done through a pull request (PR). A branch must always be created, and commits grouped together logically. Whenever asked to create commit messages, to push code, or create a pull request (PR), use this skill so everything is done correctly.
 ---
 ```

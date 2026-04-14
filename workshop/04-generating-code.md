@@ -47,12 +47,43 @@ You'll start the process of creating the new functionality by utilizing plan mod
 
 ## Review the code
 
-All AI code needs to be reviewed before being merged into production. Let's take the time now to explore the files Copilot created and modified in implementing the new feature.
+All AI code needs to be reviewed before being merged into production. Let's take the time now to explore the files Copilot created and modified in implementing the new feature. There are several ways you can review the changes — pick whichever works best for you, or try them all!
 
-1. Hide the terminal window in your codespace by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>, or review the changed files using `git diff` in the terminal.
-2. Use **Source Control** in your codespace, or `git status` and `git diff` in the terminal.
-3. Note the files changed. You should see updates to files such as **GamesRoutes.cs**, the Games API, and test files in **TailspinToys.Api.Tests**. You should also see new files created, such as Blazor components for the new filter functionality, and Playwright tests to validate the frontend.
-4. Open the files and explore the changes. In particular, notice the comment sections which have been added. All of this comes from the instructions files you worked on previously in this workshop.
+### Option A: Use `/diff` in Copilot CLI
+
+The quickest way to see what changed without leaving Copilot CLI is the built-in `/diff` command.
+
+1. Type `/diff` in the Copilot CLI prompt and press <kbd>Enter</kbd>.
+2. Copilot will display a summary of the changed files and their diffs right in the terminal.
+
+### Option B: Use the Source Control panel in your codespace
+
+If you prefer a visual side-by-side view, the VS Code Source Control panel is a great choice.
+
+1. Hide the terminal window by pressing <kbd>Ctrl</kbd>+<kbd>\`</kbd>.
+2. Open the **Source Control** panel by clicking the branch icon in the activity bar on the left, or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>.
+3. You'll see all modified and new files listed. Click any file to open a side-by-side diff view.
+
+### Option C: Run git commands from inside Copilot CLI
+
+You can run shell commands directly from Copilot CLI by prefixing them with `!`.
+
+1. Type `!git status` in the Copilot CLI prompt to see which files were changed.
+2. Type `!git diff` to view the full diff output inline.
+
+### Option D: Use a separate terminal
+
+If you'd rather keep Copilot CLI running and inspect changes in a different terminal:
+
+1. Open a new terminal by selecting **Terminal > New Terminal** from the menu, or press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>\`</kbd>.
+2. Run `git status` to see the list of changed files.
+3. Run `git diff` to review the detailed changes.
+
+### What to look for
+
+Whichever option you chose, note the files that changed. You should see updates to files such as **GamesRoutes.cs**, the Games API, and test files in **TailspinToys.Api.Tests**. You should also see new files created, such as Blazor components for the new filter functionality, and Playwright tests to validate the frontend.
+
+Open the files and explore the changes. In particular, notice the comment sections which have been added. All of this comes from the instructions files you worked on previously in this workshop.
 
 ## Summary and next steps
 
