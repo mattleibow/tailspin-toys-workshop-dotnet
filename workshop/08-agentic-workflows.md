@@ -64,36 +64,47 @@ This sets up your repository for agentic workflows. It creates several files, in
 - `.github/agents/agentic-workflows.agent.md` — an AI assistant for creating and editing workflows
 - `.vscode/settings.json` and `.vscode/mcp.json` — editor configuration
 
-### Inspect what was created
+After `gh aw init`, you can open the installed agent file to see the metadata that powers the workflow authoring experience:
 
 ```bash
-git status
-ls .github/agents/
+cat .github/agents/agentic-workflows.agent.md
 ```
 
-> [!TIP]
-> For supported triggers, tools, and permissions, use the official `gh aw` docs linked at the end of this exercise.
+It includes frontmatter like:
+
+```yaml
+---
+description: GitHub Agentic Workflows (gh-aw) - Create, debug, and upgrade AI-powered workflows with intelligent prompt routing
+disable-model-invocation: true
+---
+```
 
 ## Create a daily digest workflow
 
 Now create your first workflow — a daily digest of all open issues and pull requests in the Tailspin Toys repository.
 
-1. Create the workflow using:
+1. Start Copilot CLI:
 
     ```bash
-    gh aw new daily-digest
+    copilot
     ```
 
-2. When the interactive session opens, describe what you want:
+2. Type `/agent` and press Enter.
+
+3. Select the `agentic-workflows` agent.
+
+4. Paste in this prompt:
 
     ```
     Every weekday, create a GitHub issue that summarises all open issues
     and pull requests in this repository. Group them by label. Include the
     total count, the title, the author, and how long each item has been
     open. Title the issue "Daily Digest – <date>".
+
+    Name the workflow file daily-digest.
     ```
 
-3. The agent will ask clarifying questions (such as what trigger to use and whether write permissions are needed) and then generate the workflow file for you.
+5. The agent will ask clarifying questions (such as what trigger to use and whether write permissions are needed) and then generate the workflow files for you.
 
 ### What gets created
 
