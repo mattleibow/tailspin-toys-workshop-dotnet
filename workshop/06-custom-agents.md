@@ -59,7 +59,7 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
 3. If not already running, start Copilot CLI by issuing the following command in the terminal window:
 
     ```bash
-    copilot --allow-all-tools
+    copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
 4. Return to the workshop branch by executing a CLI command from directly inside Copilot by using the following prompt:
@@ -72,7 +72,7 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
 > Prefixing a prompt with a `!` allows you to execute CLI tools from directly inside Copilot CLI.
 
 > [!IMPORTANT]
-> This exercise assumes you are working in **your own repository created from the template** with the backlog issues from Exercise 3 already created, and that Copilot CLI can open a pull request in that repository.
+> This exercise assumes you are working in **your own repository created from the template** with the backlog issues from Exercise 3 already created, and that Copilot CLI can open a pull request in that repository. Because the custom agent creates the PR via the built-in GitHub MCP server, make sure you started Copilot CLI with `--enable-all-github-mcp-tools`.
 
 1. Bring up the list of agents by typing `/agent` in the prompt window in Copilot CLI and selecting <kbd>Enter</kbd>.
 2. Select the **Accessibility agent** from the list of available agents.
