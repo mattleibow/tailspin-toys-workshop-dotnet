@@ -155,15 +155,19 @@ And the body is a plain-English description of what the agent should do.
 
 ## Trigger the workflow
 
-Commit and push the generated files, then trigger the workflow immediately to test it:
+Now use the default Copilot agent to package the generated workflow into a pull request:
 
-```bash
-git add .gitattributes .github/workflows/daily-digest.md .github/workflows/daily-digest.lock.yml
-git commit -m "Add daily digest agentic workflow"
-git push
-```
+1. Type `/agent` and press Enter.
+2. Select the default agent.
+3. Enter this prompt:
 
-Once pushed, trigger a manual run:
+   ```
+   Can you please create a pull request for me!
+   ```
+
+This reuses the same `branches-commits-prs` skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
+
+Once the changes are pushed, trigger a manual run:
 
 ```bash
 gh aw run daily-digest
