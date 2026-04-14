@@ -108,7 +108,11 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
    ```
 
 5. Save and close **copilot-instructions.md**.
-6. Return to the terminal and restart Copilot CLI so it picks up the updated instructions:
+6. Return to the terminal, clear the conversation context and restart Copilot CLI so it picks up the updated instructions:
+
+    ```
+    /clear
+    ```
 
     ```
     /restart
@@ -162,7 +166,11 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
 > There's a chance Copilot already generated test code in the prior step, so you might be looking at the same code again. To ensure we can see the behavior, we're going to clear context, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
 
 1. Return to the terminal with Copilot CLI running.
-2. Restart Copilot CLI to start fresh:
+2. Clear the conversation context and restart Copilot CLI to start fresh:
+
+    ```
+    /clear
+    ```
 
     ```
     /restart
