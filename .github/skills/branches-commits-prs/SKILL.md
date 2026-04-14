@@ -32,6 +32,7 @@ When creating a pull request:
 - Provide a clear title describing the changes which have been made
 - In the body content of the PR:
   - Start with a description of *why* the changes were made based on the conversation history
+  - If the PR resolves a linked issue, include an explicit closing keyword such as `Fixes #123` for bug fixes or `Closes #123` for feature work
   - Include a quick list of changes as a bulleted list
   - Provide additional details grouped together logically, following good accessibility practices for headers
   - Include code snippets for important changes
