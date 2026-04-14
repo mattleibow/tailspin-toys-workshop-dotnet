@@ -130,16 +130,21 @@ The frontmatter will look similar to:
 
 ```yaml
 ---
-name: Daily Digest
 on:
-  schedule: daily on weekdays
+  schedule:
+    - cron: "0 8 * * 1-5"
   workflow_dispatch:
 permissions:
-  issues: write
-  contents: read
+  issues: read
+  pull-requests: read
 safe-outputs:
+  mentions: false
+  allowed-github-references: []
   create-issue:
-    max: 1
+    title-prefix: "Daily Digest –"
+    labels: [digest]
+    close-older-issues: true
+    expires: 7
 ---
 ```
 
