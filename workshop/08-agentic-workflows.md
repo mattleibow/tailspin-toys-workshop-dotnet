@@ -34,6 +34,24 @@ The `gh aw` CLI extension installs through the standard GitHub CLI extension mec
 > [!NOTE]
 > This step requires the **GitHub CLI (`gh`)**. If you set it up during the prerequisites, you're good to go. If not, install it now from [cli.github.com](https://cli.github.com/) and authenticate with `gh auth login`.
 
+### Authenticate with GitHub
+
+If you haven't already authenticated the CLI, run:
+
+```bash
+gh auth login
+```
+
+Follow the prompts and choose **GitHub.com** -> **HTTPS** -> **Login with a web browser**.
+
+After logging in, verify it worked:
+
+```bash
+gh auth status
+```
+
+You should see `✓ Logged in to github.com`.
+
 1. Return to your codespace or terminal.
 2. Install the `gh aw` extension:
 
