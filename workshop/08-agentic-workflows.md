@@ -29,7 +29,7 @@ You've been building features for Tailspin Toys across the previous exercises. Y
 
 ## Install the Agentic Workflows extension
 
-The `gh aw` CLI extension is installed via its own setup script.
+The `gh aw` CLI extension installs through the standard GitHub CLI extension mechanism, which works across platforms.
 
 > [!NOTE]
 > This step requires the **GitHub CLI (`gh`)**. If you set it up during the prerequisites, you're good to go. If not, install it now from [cli.github.com](https://cli.github.com/) and authenticate with `gh auth login`.
@@ -38,7 +38,7 @@ The `gh aw` CLI extension is installed via its own setup script.
 2. Install the `gh aw` extension:
 
     ```bash
-    curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash
+    gh extension install github/gh-aw
     ```
 
 3. Verify the extension is available:
@@ -48,7 +48,7 @@ The `gh aw` CLI extension is installed via its own setup script.
     ```
 
 > [!TIP]
-> To review the install script before running it, open the URL in your browser first. If `gh aw version` returns "unknown command", verify GitHub CLI is installed with `gh --version`, then re-run the installation.
+> If `gh aw version` returns "unknown command", verify GitHub CLI is installed with `gh --version`, then re-run `gh extension install github/gh-aw`.
 
 ## Initialise Agentic Workflows in your repository
 
@@ -61,7 +61,6 @@ gh aw init
 This sets up your repository for agentic workflows. It creates several files, including:
 
 - `.gitattributes` — marks compiled lock files as generated
-- `.github/aw/github-agentic-workflows.md` — the full reference documentation
 - `.github/agents/agentic-workflows.agent.md` — an AI assistant for creating and editing workflows
 - `.vscode/settings.json` and `.vscode/mcp.json` — editor configuration
 
@@ -69,12 +68,11 @@ This sets up your repository for agentic workflows. It creates several files, in
 
 ```bash
 git status
-ls .github/aw/
 ls .github/agents/
 ```
 
 > [!TIP]
-> The file `.github/aw/github-agentic-workflows.md` is the complete reference for all frontmatter options. Open it whenever you need to check supported triggers, tools, or permissions.
+> For supported triggers, tools, and permissions, use the official `gh aw` docs linked at the end of this exercise.
 
 ## Create a daily digest workflow
 
