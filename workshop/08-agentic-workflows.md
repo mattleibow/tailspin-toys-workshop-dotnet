@@ -102,6 +102,7 @@ Now create your first workflow — a daily digest of all open issues and pull re
     open. Title the issue "Daily Digest – <date>".
 
     Name the workflow file daily-digest.
+    Allow for manual runs.
     ```
 
 5. The agent will ask clarifying questions (such as what trigger to use and whether write permissions are needed) and then generate the workflow files for you.
