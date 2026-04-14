@@ -167,7 +167,16 @@ Now use the default Copilot agent to package the generated workflow into a pull 
 
 This reuses the same `branches-commits-prs` skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
 
-Once the changes are pushed, trigger a manual run:
+4. Open the PR on GitHub and merge it.
+
+5. Return to your terminal and switch back to `main`:
+
+```bash
+git checkout main
+git pull
+```
+
+Once the workflow is on `main`, trigger a manual run:
 
 ```bash
 gh aw run daily-digest
