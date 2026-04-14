@@ -106,6 +106,12 @@ Now create your first workflow — a daily digest of all open issues and pull re
 
 5. The agent will ask clarifying questions (such as what trigger to use and whether write permissions are needed) and then generate the workflow files for you.
 
+6. If Copilot asks you to create a `digest` label for the generated issue, do this:
+
+   1. Open your repository on GitHub and go to **Issues** > **Labels**.
+   2. Click **New label**.
+   3. Enter `digest`, choose any colour you like, create the label, and then return to Copilot.
+
 ### What gets created
 
 After the agent finishes, you will have:
