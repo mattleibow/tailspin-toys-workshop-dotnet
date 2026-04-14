@@ -176,11 +176,20 @@ git checkout main
 git pull
 ```
 
-Once the workflow is on `main`, trigger a manual run:
+Once the workflow is on `main`, trigger a manual run using either of these options:
+
+### Option 1: Run it from the CLI
 
 ```bash
 gh aw run daily-digest
 ```
+
+### Option 2: Run it from the GitHub UI
+
+1. Open your repository on GitHub and go to the **Actions** tab.
+2. Select the `daily-digest` workflow from the list on the left.
+3. Click **Run workflow**.
+4. Choose the `main` branch and confirm the run.
 
 After the run completes (usually under a minute), open GitHub and check the **Issues** tab. You should see a new issue titled **Daily Digest – \<today's date\>** summarising your open issues and PRs — including the backlog items you created in Exercise 3!
 
