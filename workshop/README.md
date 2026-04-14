@@ -69,7 +69,7 @@ This full-stack application provides an excellent playground for exploring Copil
 
 | Exercise | Topic | Description |
 |----------|-------|-------------|
-| [8. Agentic Workflows][ex8] | Automation | Install the gh aw extension and create a daily digest workflow |
+| [8. Agentic Workflows][ex8] | Automation | Prepare your repo for gh aw and create a daily digest workflow |
 | [9. Trending Games Digest][ex9] | External APIs | Fetch BoardGameGeek trending games on a schedule |
 | [10. ChatOps: Game Lookup][ex10] | ChatOps | Create a /game-lookup slash command |
 | [11. Review & Next Steps][ex11] | Summary | Recap both parts and continue learning |

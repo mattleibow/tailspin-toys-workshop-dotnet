@@ -7,6 +7,7 @@ Now let's take things further. Instead of running Copilot from your terminal one
 In this exercise, you will:
 
 - learn what agentic workflows are and why they complement the skills you've already built.
+- prepare your local environment and GitHub repository for agentic workflows.
 - install the `gh aw` CLI extension and initialise it in your repository.
 - create your first agentic workflow: a **daily digest of open issues and pull requests** for the Tailspin Toys project.
 - trigger the workflow and verify it creates a summary issue.
@@ -27,7 +28,9 @@ Before a workflow can run in GitHub Actions, it must be **compiled** into a lock
 
 You've been building features for Tailspin Toys across the previous exercises. Your repository now has issues, branches, and pull requests. The team wants a way to stay on top of all this activity without manually checking GitHub every morning. You'll create an agentic workflow that generates a daily digest — automatically.
 
-## Install the Agentic Workflows extension
+## Prepare your repo for Agentic Workflows
+
+Before you create or run a workflow, make sure both your local environment and your GitHub repository are ready.
 
 The `gh aw` CLI extension installs through the standard GitHub CLI extension mechanism, which works across platforms.
 
@@ -51,6 +54,8 @@ gh auth status
 ```
 
 You should see `✓ Logged in to github.com`.
+
+### Install the Agentic Workflows extension
 
 1. Return to your codespace or terminal.
 2. Install the `gh aw` extension:
@@ -194,7 +199,23 @@ git checkout main
 git pull
 ```
 
-Once the workflow is on `main`, trigger a manual run using either of these options:
+6. Before the first run, add the repository secret that GitHub Actions uses to authenticate Copilot CLI:
+
+   1. Create a fine-grained Personal Access Token (PAT) under your own GitHub user account.
+   2. Under **Permissions** -> **Account permissions**, set **Copilot Requests** to **Read**.
+   3. In your repository, go to **Settings** -> **Secrets and variables** -> **Actions**.
+   4. Create a new repository secret named `COPILOT_GITHUB_TOKEN` and paste in the token value.
+
+   Or do the same from the CLI:
+
+   ```bash
+   gh aw secrets set COPILOT_GITHUB_TOKEN --value "<your-github-pat>"
+   ```
+
+> [!TIP]
+> If you see `None of the following secrets are set: COPILOT_GITHUB_TOKEN`, this step is missing. Secret names are case-sensitive, and organization secrets must explicitly allow access to the repository.
+
+Once the workflow is on `main` and the secret is set, trigger a manual run using either of these options:
 
 ### Option 1: Run it from the CLI
 
