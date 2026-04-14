@@ -166,14 +166,10 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
 > There's a chance Copilot already generated test code in the prior step, so you might be looking at the same code again. To ensure we can see the behavior, we're going to clear context, be a bit more specific with the prompt, and see the tests Copilot generates based on the instructions.
 
 1. Return to the terminal with Copilot CLI running.
-2. Clear the conversation context and restart Copilot CLI to start fresh:
+2. Clear the conversation context to start fresh:
 
     ```
     /clear
-    ```
-
-    ```
-    /restart
     ```
 
 3. Send the following prompt to ensure tests are generated:
