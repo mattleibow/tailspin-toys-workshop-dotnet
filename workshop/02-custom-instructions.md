@@ -84,6 +84,10 @@ To see the impact of custom instructions, you'll send a prompt with the current 
 > Copilot CLI automatically loads **copilot-instructions.md** as well as any matching **.instructions** files when it reads or generates files in your project. You don't need to do anything special — the instructions are picked up automatically.
 
 6. Explore the code, noticing the generated code includes [nullable reference types][csharp-nullable-reference-types] because, as you'll see, the custom instructions includes the directive to use them.
+
+> [!TIP]
+> You can use the `/diff` command in Copilot CLI to view the generated or modified files and see exactly what changes were made.
+
 7. Notice the generated code **is missing** either an XML doc comment or a comment header — or both!
 
 > [!IMPORTANT]
@@ -115,6 +119,8 @@ As highlighted previously, `copilot-instructions.md` is designed to provide proj
    ```plaintext
    Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers.
    ```
+
+8. Use the `/diff` command to view the generated files and see the changes Copilot made.
 
 9.  Notice how the newly generated code includes a comment header at the top of the file which resembles the following:
 
@@ -168,10 +174,15 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
     Create a new endpoint to return a list of all publishers. It should return the name and id for all publishers. Also generate the tests for the newly generated endpoint.
     ```
 
+> [!TIP]
+> Use the `/diff` command to view the generated files and review what Copilot created.
+
 4. Explore the generated code for the test. Based on the instructions, it should:
     - utilize xUnit with the `[Fact]` or `[Theory]` attribute.
     - use `WebApplicationFactory<Program>` for integration testing.
     - contain both setup and teardown via constructor and `IDisposable`.
+
+5. **Keep the generated code** — we'll be using it in the next exercises.
 
 ## Summary and next steps
 
