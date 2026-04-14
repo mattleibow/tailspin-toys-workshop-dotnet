@@ -12,7 +12,8 @@
 		},
 		"ghcr.io/devcontainers/features/node:1": {},
 		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
-		"ghcr.io/schlich/devcontainer-features/playwright:0": {}
+		"ghcr.io/schlich/devcontainer-features/playwright:0": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"postCreateCommand": "./scripts/setup-env.sh",
 	"forwardPorts": [
