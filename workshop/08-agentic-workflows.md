@@ -1,4 +1,4 @@
-# Exercise 8 - Automating Your Repo with Agentic Workflows
+# Exercise 8 - Prepare Your Repo for Agentic Workflows
 
 Over the previous exercises you've explored GitHub Copilot CLI from multiple angles — custom instructions, MCP servers, code generation, agent skills, custom agents, and slash commands. You've built real features for Tailspin Toys, created pull requests, and learned how to get the most out of AI-assisted development.
 
@@ -8,9 +8,8 @@ In this exercise, you will:
 
 - learn what agentic workflows are and why they complement the skills you've already built.
 - prepare your local environment and GitHub repository for agentic workflows.
-- install the `gh aw` CLI extension and initialise it in your repository.
-- create your first agentic workflow: a **daily digest of open issues and pull requests** for the Tailspin Toys project.
-- trigger the workflow and verify it creates a summary issue.
+- install the `gh aw` CLI extension and verify that it is ready to use.
+- configure the repository secret required for workflow runs.
 
 ## What are Agentic Workflows?
 
@@ -26,20 +25,13 @@ Before a workflow can run in GitHub Actions, it must be **compiled** into a lock
 
 ## Scenario
 
-You've been building features for Tailspin Toys across the previous exercises. Your repository now has issues, branches, and pull requests. The team wants a way to stay on top of all this activity without manually checking GitHub every morning. You'll create an agentic workflow that generates a daily digest — automatically.
+You've been building features for Tailspin Toys across the previous exercises. Your repository now has issues, branches, and pull requests. The team wants a way to stay on top of all this activity without manually checking GitHub every morning.
 
-## Prepare your repo for Agentic Workflows
+Before you create that automation, you need to prepare both your terminal environment and your GitHub repository so agentic workflows can run successfully.
 
-Before you create or run a workflow, make sure both your local environment and your GitHub repository are ready.
+## Authenticate with GitHub
 
-The `gh aw` CLI extension installs through the standard GitHub CLI extension mechanism, which works across platforms.
-
-> [!NOTE]
-> This step requires the **GitHub CLI (`gh`)**. If you set it up during the prerequisites, you're good to go. If not, install it now from [cli.github.com](https://cli.github.com/) and authenticate with `gh auth login`.
-
-### Authenticate with GitHub
-
-If you haven't already authenticated the CLI, run:
+If you haven't already authenticated the GitHub CLI, run:
 
 ```bash
 gh auth login
@@ -53,198 +45,57 @@ After logging in, verify it worked:
 gh auth status
 ```
 
-You should see `✓ Logged in to github.com`.
+You should see `Logged in to github.com`.
 
-### Install the Agentic Workflows extension
+## Install the Agentic Workflows extension
 
-1. Return to your codespace or terminal.
-2. Install the `gh aw` extension:
+The `gh aw` CLI extension installs through the standard GitHub CLI extension mechanism, which works across platforms.
 
-    ```bash
-    gh extension install github/gh-aw
-    ```
-
-3. Verify the extension is available:
-
-    ```bash
-    gh aw version
-    ```
+```bash
+gh extension install github/gh-aw
+gh aw version
+```
 
 > [!TIP]
 > If `gh aw version` returns "unknown command", verify GitHub CLI is installed with `gh --version`, then re-run `gh extension install github/gh-aw`.
 
-## Initialise Agentic Workflows in your repository
+## Add the Copilot token secret
 
-From the root of your Tailspin Toys repository, run:
+Before your workflows can run in GitHub Actions, your repository needs a secret named `COPILOT_GITHUB_TOKEN`. Without it, workflow runs will fail with an error like:
+
+```text
+None of the following secrets are set: COPILOT_GITHUB_TOKEN
+```
+
+If you're using Copilot as the AI engine, this secret must contain a **fine-grained GitHub Personal Access Token (PAT)**.
+
+### Create the token
+
+1. Create a new fine-grained PAT from your **own GitHub user account**.
+2. Under **Permissions** -> **Account permissions**, set **Copilot Requests** to **Read**.
+3. Generate the token and copy the value somewhere safe.
+
+### Add it to the repository
+
+You can add the secret in the GitHub UI:
+
+1. Open your repository on GitHub.
+2. Go to **Settings** -> **Secrets and variables** -> **Actions**.
+3. Click **New repository secret**.
+4. Name it `COPILOT_GITHUB_TOKEN` and paste in your token.
+
+Or set it from the CLI:
 
 ```bash
-gh aw init
+gh aw secrets set COPILOT_GITHUB_TOKEN --value "<your-github-pat>"
 ```
-
-This sets up your repository for agentic workflows. It creates several files, including:
-
-- `.gitattributes` — marks compiled lock files as generated
-- `.github/agents/agentic-workflows.agent.md` — an AI assistant for creating and editing workflows
-- `.vscode/settings.json` and `.vscode/mcp.json` — editor configuration
-
-After `gh aw init`, you can open the installed agent file to see the metadata that powers the workflow authoring experience:
-
-```bash
-cat .github/agents/agentic-workflows.agent.md
-```
-
-It includes frontmatter like:
-
-```yaml
----
-description: GitHub Agentic Workflows (gh-aw) - Create, debug, and upgrade AI-powered workflows with intelligent prompt routing
-disable-model-invocation: true
----
-```
-
-## Create a daily digest workflow
-
-Now create your first workflow — a daily digest of all open issues and pull requests in the Tailspin Toys repository.
-
-1. Start Copilot CLI:
-
-    ```bash
-    copilot
-    ```
-
-2. Type `/agent` and press Enter.
-
-3. Select the `agentic-workflows` agent.
-
-4. Paste in this prompt:
-
-    ```
-    Every weekday, create a GitHub issue that summarises all open issues
-    and pull requests in this repository. Group them by label. Include the
-    total count, the title, the author, and how long each item has been
-    open. Title the issue "Daily Digest – <date>".
-
-    Name the workflow file daily-digest.
-    Allow for manual runs.
-    ```
-
-5. The agent will ask clarifying questions (such as what trigger to use and whether write permissions are needed) and then generate the workflow files for you.
-
-6. If Copilot asks you to create a `digest` label for the generated issue, do this:
-
-   1. Open your repository on GitHub and go to **Issues** > **Labels**.
-   2. Click **New label**.
-   3. Enter `digest`, choose any colour you like, create the label, and then return to Copilot.
-
-### What gets created
-
-After the agent finishes, you will have:
-
-- `.github/workflows/daily-digest.md` — the human-readable workflow
-- `.github/workflows/daily-digest.lock.yml` — the compiled file for GitHub Actions
-
-Open the markdown file to see what the agent wrote:
-
-```bash
-cat .github/workflows/daily-digest.md
-```
-
-The frontmatter will look similar to:
-
-```yaml
----
-on:
-  schedule:
-    - cron: "0 8 * * 1-5"
-  workflow_dispatch:
-permissions:
-  issues: read
-  pull-requests: read
-safe-outputs:
-  mentions: false
-  allowed-github-references: []
-  create-issue:
-    title-prefix: "Daily Digest –"
-    labels: [digest]
-    close-older-issues: true
-    expires: 7
----
-```
-
-And the body is a plain-English description of what the agent should do.
-
-> [!NOTE]
-> Agentic workflow files are regular markdown — commit them to version control just like any other code. The `.lock.yml` is auto-generated and should not be edited by hand.
-
-## Trigger the workflow
-
-Now use the default Copilot agent to package the generated workflow into a pull request:
-
-1. Type `/agent` and press Enter.
-2. Select the default agent.
-3. Enter this prompt:
-
-   ```
-   Can you please create a pull request for me!
-   ```
-
-This reuses the same `branches-commits-prs` skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
-
-4. Open the PR on GitHub and merge it.
-
-5. Return to your terminal and switch back to `main`:
-
-```bash
-git checkout main
-git pull
-```
-
-6. Before the first run, add the repository secret that GitHub Actions uses to authenticate Copilot CLI:
-
-   1. Create a fine-grained Personal Access Token (PAT) under your own GitHub user account.
-   2. Under **Permissions** -> **Account permissions**, set **Copilot Requests** to **Read**.
-   3. In your repository, go to **Settings** -> **Secrets and variables** -> **Actions**.
-   4. Create a new repository secret named `COPILOT_GITHUB_TOKEN` and paste in the token value.
-
-   Or do the same from the CLI:
-
-   ```bash
-   gh aw secrets set COPILOT_GITHUB_TOKEN --value "<your-github-pat>"
-   ```
 
 > [!TIP]
-> If you see `None of the following secrets are set: COPILOT_GITHUB_TOKEN`, this step is missing. Secret names are case-sensitive, and organization secrets must explicitly allow access to the repository.
-
-Once the workflow is on `main` and the secret is set, trigger a manual run using either of these options:
-
-### Option 1: Run it from the CLI
-
-```bash
-gh aw run daily-digest
-```
-
-### Option 2: Run it from the GitHub UI
-
-1. Open your repository on GitHub and go to the **Actions** tab.
-2. Select the `daily-digest` workflow from the list on the left.
-3. Click **Run workflow**.
-4. Choose the `main` branch and confirm the run.
-
-After the run completes (usually under a minute), open GitHub and check the **Issues** tab. You should see a new issue titled **Daily Digest – \<today's date\>** summarising your open issues and PRs — including the backlog items you created in Exercise 3!
-
-> [!NOTE]
-> If the repository has few open issues or PRs, the digest will reflect that. The workflow is still working correctly.
+> If you believe the secret is already configured but the workflow still fails, check that the name matches exactly, and if it is an organization secret, make sure this repository has been granted access.
 
 ## Summary and next steps
 
-You've transitioned from building features manually with Copilot CLI to automating your development workflow. In this exercise you:
-
-- learned what agentic workflows are and how they work as markdown + compiled lock files.
-- installed the `gh aw` CLI extension and initialised it in your repository.
-- created a daily digest workflow that summarises your Tailspin Toys issues and PRs.
-- triggered and verified the workflow end-to-end.
-
-In the next exercises, you'll create more sophisticated workflows that pull data from external APIs and respond to team actions in real time.
+Your environment and repository are now ready for agentic workflows. In the next exercise, you'll start from `gh aw init`, generate your first workflow, open a PR for it, merge it, and run it.
 
 ## Resources
 

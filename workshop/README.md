@@ -65,14 +65,15 @@ This full-stack application provides an excellent playground for exploring Copil
 | [6. Custom Agents][ex6] | Agents | Create and use custom agents |
 | [7. Slash Commands][ex7] | CLI Features | Explore context, models, and sharing |
 
-### Part 2: Automating with Agentic Workflows (~60 min)
+### Part 2: Automating with Agentic Workflows (~75 min)
 
 | Exercise | Topic | Description |
 |----------|-------|-------------|
-| [8. Agentic Workflows][ex8] | Automation | Prepare your repo for gh aw and create a daily digest workflow |
-| [9. Trending Games Digest][ex9] | External APIs | Fetch BoardGameGeek trending games on a schedule |
-| [10. ChatOps: Game Lookup][ex10] | ChatOps | Create a /game-lookup slash command |
-| [11. Review & Next Steps][ex11] | Summary | Recap both parts and continue learning |
+| [8. Agentic Workflows Setup][ex8] | Setup | Authenticate GitHub, install gh aw, and configure repo secrets |
+| [9. First Agentic Workflow][ex9] | Automation | Initialise gh aw, create a daily digest, open a PR, and run it |
+| [10. Trending Games Digest][ex10] | External APIs | Fetch BoardGameGeek trending games on a schedule |
+| [11. ChatOps: Game Lookup][ex11] | ChatOps | Create a /game-lookup slash command |
+| [12. Review & Next Steps][ex12] | Summary | Recap both parts and continue learning |
 
 ## Tips for Success
 
@@ -101,6 +102,7 @@ This full-stack application provides an excellent playground for exploring Copil
 [ex6]: ./06-custom-agents.md
 [ex7]: ./07-slash-commands.md
 [ex8]: ./08-agentic-workflows.md
-[ex9]: ./09-trending-games-digest.md
-[ex10]: ./10-chatops-game-lookup.md
-[ex11]: ./11-review.md
+[ex9]: ./09-first-agentic-workflow.md
+[ex10]: ./10-trending-games-digest.md
+[ex11]: ./11-chatops-game-lookup.md
+[ex12]: ./12-review.md

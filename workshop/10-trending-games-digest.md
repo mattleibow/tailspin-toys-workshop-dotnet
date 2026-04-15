@@ -1,4 +1,4 @@
-# Exercise 9 - Trending Games Digest
+# Exercise 10 - Trending Games Digest
 
 In the previous exercise you created your first agentic workflow — a daily digest of issues and PRs. Now you'll build something more powerful: a workflow that reaches out to an **external API** and brings data into your GitHub repository automatically.
 

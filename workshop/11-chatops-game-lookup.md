@@ -1,4 +1,4 @@
-# Exercise 10 - ChatOps: Game Lookup Slash Command
+# Exercise 11 - ChatOps: Game Lookup Slash Command
 
 In the previous exercises you built scheduled workflows that run automatically. Now you'll use the **ChatOps pattern** to create an interactive slash command that team members can trigger directly from a GitHub issue comment.
 
