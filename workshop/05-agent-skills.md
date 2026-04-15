@@ -6,7 +6,7 @@ Let's explore skills, how they're utilized by AI agents, and how we can use a sk
 
 ## Scenario
 
-You are a part-time developer for Tailspin Toys - a crowdfunding platform for board games with a developer theme. The team has a set of requirements for pull requests (PR):
+You are a part-time developer for Tailspin Toys - a crowdfunding platform for games with a developer theme. The team has a set of requirements for pull requests (PR):
 
 - clear commit messages, with files grouped logically.
 - all tests must pass before a PR is created.

@@ -13,14 +13,14 @@ In the previous exercise you used the ChatOps pattern to trigger a workflow from
 
 ## Scenario
 
-Tailspin Toys is a crowdfunding platform for games. The team wants to stay on top of what's trending in the board game world so they can spot opportunities — new games that might want to crowdfund, or popular titles that could inspire new features. You'll create a workflow that automatically fetches the **BoardGameGeek Hot Games list** every morning and posts it as a GitHub issue.
+Tailspin Toys is a crowdfunding platform for games. The team wants to stay on top of what's trending in the free-to-play game world so they can spot opportunities — popular titles, genres, and release patterns that could inspire new features. You'll create a workflow that automatically fetches a **FreeToGame popularity feed** every morning and posts it as a GitHub issue.
 
-## Background: The BoardGameGeek API
+## Background: The FreeToGame API
 
-[BoardGameGeek (BGG)](https://boardgamegeek.com/) is the largest board game database in the world. It provides a public XML API that requires no authentication:
+[FreeToGame](https://www.freetogame.com/api-doc) provides a public JSON API for free-to-play games and does not require authentication for demo use:
 
-- `GET https://boardgamegeek.com/xmlapi2/hot?type=boardgame` — returns the current "hot" (trending) board games
-- `GET https://boardgamegeek.com/xmlapi2/thing?id=<id>&stats=1` — returns details for a specific game (rating, description, etc.)
+- `GET https://www.freetogame.com/api/games?sort-by=popularity` — returns games sorted by popularity
+- `GET https://www.freetogame.com/api/game?id=<id>` — returns details for a specific game
 
 Your agentic workflow will call these endpoints, parse the results, and format them into a readable GitHub issue.
 
@@ -32,21 +32,21 @@ Then provide the following description:
 
 ```
 Create a daily digest workflow for the Tailspin Toys team that tracks
-trending board games. Every weekday, fetch the current hot board games
-from the BoardGameGeek XML API
-(https://boardgamegeek.com/xmlapi2/hot?type=boardgame). For the top 15
-games, include: the game name, its BoardGameGeek rank on the hot list,
-the year published, and a link to its BGG page
-(https://boardgamegeek.com/boardgame/<id>). Create a GitHub issue
-titled "🎲 Trending Games – <date>" with the results formatted as a
-Markdown table. Add a brief intro paragraph explaining these are the
-currently trending games on BoardGameGeek.
+popular free-to-play games. Every weekday, fetch the games list from the
+FreeToGame API sorted by popularity
+(https://www.freetogame.com/api/games?sort-by=popularity). For the top 15
+games, include: the game name, genre, platform, publisher, release date,
+and a link to its FreeToGame page from the `freetogame_profile_url`
+field. Create a GitHub issue titled "🎮 Trending Free Games – <date>"
+with the results formatted as a Markdown table. Add a brief intro
+paragraph explaining these are currently popular free-to-play games
+according to FreeToGame.
 
 Name the workflow file trending-games.
 Allow for manual runs.
 ```
 
-The agent will confirm the trigger (weekday schedule), required tools (`web-fetch`), permissions (`issues: write`), and the network allowlist (the BGG API domain), then generate the workflow files.
+The agent will confirm the trigger (weekday schedule), required tools (`web-fetch`), permissions (`issues: write`), and the network allowlist (the FreeToGame API domain), then generate the workflow files.
 
 ## Part 2 — Review and refine the workflow
 
@@ -70,7 +70,7 @@ permissions:
   issues: write
   contents: read
 network:
-  - boardgamegeek.com
+  - www.freetogame.com
 tools:
   - web-fetch
 safe-outputs:
@@ -86,7 +86,7 @@ safe-outputs:
 
 ### Things to check
 
-1. **Network allowlist** — does the frontmatter include `boardgamegeek.com`? The agent needs network access to call the BGG API.
+1. **Network allowlist** — does the frontmatter include `www.freetogame.com`? The agent needs network access to call the FreeToGame API.
 2. **Schedule** — does it use fuzzy scheduling (`daily on weekdays`) rather than a fixed cron? Fuzzy scheduling is preferred because it distributes load and automatically adds `workflow_dispatch` for manual runs.
 3. **Prompt body** — does the body clearly describe the filtering criteria and the desired output format?
 
@@ -123,9 +123,9 @@ Wait for the run to complete, then open GitHub and check the **Issues** tab.
 
 ### What to check
 
-- The issue title contains today's date and the 🎲 emoji.
-- The issue body is a Markdown table with game names, hot list ranks, years, and BGG links.
-- The games are real, currently trending board games from BoardGameGeek.
+- The issue title contains today's date and the 🎮 emoji.
+- The issue body is a Markdown table with game names, genres, platforms, release dates, and FreeToGame links.
+- The games are real, currently popular free-to-play games from FreeToGame.
 
 > [!TIP]
 > If the output looks good but the formatting is off, edit the markdown body of `.github/workflows/trending-games.md` to tweak the output template, then push and re-run — no recompilation needed.
@@ -134,13 +134,13 @@ Wait for the run to complete, then open GitHub and check the **Issues** tab.
 
 - [ ] `.github/workflows/trending-games.md` exists in your repository
 - [ ] `.github/workflows/trending-games.lock.yml` exists in your repository
-- [ ] The workflow frontmatter includes `boardgamegeek.com` in the network allowlist
+- [ ] The workflow frontmatter includes `www.freetogame.com` in the network allowlist
 - [ ] The workflow uses fuzzy scheduling (`daily on weekdays`)
-- [ ] A GitHub issue titled **🎲 Trending Games – \<today's date\>** was created with a table of trending board games
+- [ ] A GitHub issue titled **🎮 Trending Free Games – \<today's date\>** was created with a table of popular games
 
 ## Summary and next steps
 
-You've created a workflow that automatically monitors the board game world for Tailspin Toys. You learned how to:
+You've created a workflow that automatically monitors popular game trends for Tailspin Toys. You learned how to:
 
 - write a targeted prompt for an agentic workflow that calls an external API.
 - configure network allowlists, tools, and safe outputs in the frontmatter.
@@ -151,10 +151,10 @@ This optional extension shows how Agentic Workflows can also pull live data from
 
 ## Resources
 
-- [BoardGameGeek XML API2][bgg-api]
+- [FreeToGame API Docs][freetogame-api]
 - [Agentic Workflows Reference][aw-reference]
 
 ---
 
-[bgg-api]: https://boardgamegeek.com/wiki/page/BGG_XML_API2
+[freetogame-api]: https://www.freetogame.com/api-doc
 [aw-reference]: https://github.github.com/gh-aw/
