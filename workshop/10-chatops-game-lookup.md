@@ -16,8 +16,8 @@ In the previous exercises you built scheduled workflows that run automatically. 
 The ChatOps pattern lets team members trigger agentic workflows by posting a **slash command** in a GitHub issue or pull request comment. The pattern works like this:
 
 1. A user posts a comment containing a slash command and arguments (e.g., `/game-lookup Warframe`).
-2. GitHub fires an `issue_comment` webhook event.
-3. The agentic workflow detects the slash command, extracts the arguments, runs its logic, and posts the result as a reply in the same thread.
+2. GitHub fires an `issue_comment` event, and the workflow's `slash_command` frontmatter handles the command parsing.
+3. The agentic workflow extracts the arguments, runs its logic, and posts the result as a reply in the same thread.
 
 This is powerful because it keeps context inside GitHub — no need to switch to a separate tool. For the Tailspin Toys team, this means anyone can quickly look up a game's details without leaving the issue they're discussing.
 
@@ -52,9 +52,10 @@ Name the workflow file game-lookup.
 ```
 
 The agent will configure:
-- **Trigger**: `issue_comment` with a condition filtering for comments starting with `/game-lookup`
+- **Trigger**: a `slash_command` named `game-lookup` for `issue_comment` events
 - **Tools**: `web-fetch` to call the FreeToGame API
-- **Network**: `www.freetogame.com` in the allowlist
+- **Network**: `defaults` plus `www.freetogame.com` in the allowlist
+- **Permissions**: `issues: read`
 - **Safe outputs**: `add-comment` to reply to the issue
 
 ## Part 2 — Review the generated workflow
@@ -70,15 +71,28 @@ The frontmatter will look similar to:
 ```yaml
 ---
 name: Game Lookup
+description: >
+  ChatOps slash command: post /game-lookup <name> in any issue comment to fetch
+  free-to-play game details from the FreeToGame API and reply with a formatted
+  Markdown summary.
 on:
-  issue_comment:
-    types: [created]
-    if: startsWith(github.event.comment.body, '/game-lookup')
+  slash_command:
+    name: game-lookup
+    events: [issue_comment]
+    roles: all
+    reaction: eyes
+    status-comment: true
 permissions:
-  issues: write
-  contents: read
+  issues: read
+checkout: false
+rate-limit:
+  max: 5
+  window: 60
+timeout-minutes: 5
 network:
-  - www.freetogame.com
+  allowed:
+    - defaults
+    - www.freetogame.com
 tools:
   - web-fetch
 safe-outputs:
@@ -89,8 +103,8 @@ safe-outputs:
 
 ### Things to verify
 
-1. **Trigger condition** — the `if:` clause filters so the workflow only runs when someone types `/game-lookup`, not on every comment.
-2. **Network allowlist** — `www.freetogame.com` must be listed so the agent can fetch game details.
+1. **Slash command config** — the `slash_command` block should name the command `game-lookup` and listen to `issue_comment` events.
+2. **Network allowlist** — `network.allowed` should include `defaults` and `www.freetogame.com` so the agent can fetch game details.
 3. **Safe output** — `add-comment` is declared so the agent can post the result back to the issue.
 4. **Prompt body** — the markdown body describes how to parse the game name, call the API, and format the reply.
 
@@ -163,7 +177,7 @@ space-ninja movement, and a huge amount of progression content.
 |---------|---------|
 | Agent doesn't reply | Check that the lock file is on the default branch and that the trigger condition matches. |
 | "No results found" | The game name might need to be more specific. Try the full official name. |
-| Permission denied | Ensure `issues: write` is in the workflow frontmatter and the lock file is recompiled. |
+| Permission denied | Ensure the frontmatter includes `issues: read` and the `add-comment` safe output, then recompile the lock file. |
 | Reply is empty | The API response may not have been parsed correctly. Re-check the prompt instructions and try again. |
 
 ## Success criteria
@@ -178,7 +192,7 @@ space-ninja movement, and a huge amount of progression content.
 
 You've built a ChatOps slash command that lets the Tailspin Toys team look up game details without leaving GitHub. You learned how to:
 
-- use the ChatOps pattern with `issue_comment` triggers.
+- use the ChatOps pattern with `slash_command` workflows on issue comments.
 - parse arguments from a slash command.
 - call an external API and format the results.
 - use `add-comment` safe outputs to reply inline.
