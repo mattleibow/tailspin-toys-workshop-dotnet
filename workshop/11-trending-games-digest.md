@@ -7,7 +7,7 @@ In the previous exercise you used the ChatOps pattern to trigger a workflow from
 ## Objectives
 
 - Write a targeted natural-language prompt for an agentic workflow that calls an external API
-- Understand frontmatter configuration: network allowlists, tools, and safe outputs
+- Understand frontmatter configuration: schedules, network allowlists, and safe outputs
 - Inspect and refine the generated workflow markdown
 - Validate that the output issue is useful and well-structured
 
@@ -46,7 +46,7 @@ Name the workflow file trending-games.
 Allow for manual runs.
 ```
 
-The agent will confirm the trigger (weekday schedule), required tools (`web-fetch`), permissions (`issues: write`), and the network allowlist (the FreeToGame API domain), then generate the workflow files.
+The agent will confirm the weekday schedule, issue-creation safeguards, timeout, and the FreeToGame network allowlist, then generate the workflow files.
 
 ## Part 2 — Review and refine the workflow
 
@@ -62,27 +62,37 @@ The file has two parts:
 
 ```yaml
 ---
-name: Trending Games Digest
+name: Trending Free Games
+description: >
+ Every weekday, fetches the top 15 most popular free-to-play games from the
+ FreeToGame API and creates a GitHub issue with a Markdown table summary for
+ the Tailspin Toys team.
 on:
-  schedule: daily on weekdays
-  workflow_dispatch:
+ schedule: daily on weekdays
+ workflow_dispatch:
 permissions:
-  issues: write
-  contents: read
+ issues: read
 network:
-  - www.freetogame.com
-tools:
-  - web-fetch
+ allowed:
+ - defaults
+ - www.freetogame.com
+checkout: false
+timeout-minutes: 10
 safe-outputs:
-  create-issue:
-    max: 1
+ mentions: false
+ allowed-github-references: []
+ create-issue:
+  title-prefix: "🎮 Trending Free Games –"
+  labels: [digest, games]
+  close-older-issues: true
+  expires: 14
 ---
 ```
 
 **Markdown body** (after the frontmatter) — the plain-English instructions. You can edit the body directly and your changes will take effect on the next run, **without recompiling**.
 
 > [!NOTE]
-> If you want to change the trigger, tools, permissions, or network rules (the frontmatter), you need to recompile: `gh aw compile trending-games`.
+> If you want to change the trigger, permissions, network rules, or issue output settings in the frontmatter, you need to recompile: `gh aw compile trending-games`.
 
 ### Things to check
 
