@@ -79,6 +79,7 @@ To see the impact of custom instructions, you'll send a prompt with the current 
     ```
 
 5. Copilot explores the project to learn how best to implement the code, and generates suggestions which may include code for `PublishersRoutes.cs`, `Program.cs`, and tests.
+6. **Don't accept the suggested changes** — this was just to see what Copilot generates with the current instructions.
 
 > [!TIP]
 > Copilot CLI automatically loads **copilot-instructions.md** as well as any matching **.instructions** files when it reads or generates files in your project. You don't need to do anything special — the instructions are picked up automatically.
@@ -186,7 +187,28 @@ Our focus in the last two sets of steps was on **copilot-instructions.md**, the 
     - use `WebApplicationFactory<Program>` for integration testing.
     - contain both setup and teardown via constructor and `IDisposable`.
 
-5. **Keep the generated code** — we'll be using it in the next exercises.
+5. **Keep the generated code** — we'll be using it in later exercises.
+
+## Commit and push your changes
+
+Now that you have generated the publishers endpoint with the correct coding standards, let's commit this to the `main` branch so it's available for the rest of the workshop.
+
+1. Return to the terminal. If Copilot CLI is running, you can run shell commands directly by prefixing with `!`:
+
+    ```
+    !git add -A && git commit -m "Add publishers endpoint with tests" && git push
+    ```
+
+    Or if you prefer, exit Copilot CLI and run:
+
+    ```bash
+    git add -A
+    git commit -m "Add publishers endpoint with tests"
+    git push
+    ```
+
+> [!NOTE]
+> If you accepted changes from an earlier step by mistake, you can always reset to a clean state with `git checkout .` and then re-run only the final prompt from the previous section.
 
 ## Summary and next steps
 
@@ -213,5 +235,5 @@ Congratulations! You explored how to ensure Copilot has the right context to gen
 [personal-instructions]: https://docs.github.com/copilot/customizing-copilot/adding-personal-custom-instructions-for-github-copilot
 [copilot-instructions-five-tips]: https://github.blog/ai-and-ml/github-copilot/5-tips-for-writing-better-custom-instructions-for-copilot/
 [awesome-copilot]: https://github.com/github/awesome-copilot
-[ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/main/.github/instructions/tailwindcss.instructions.md
-[blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop/blob/main/.github/instructions/blazor.instructions.md
+[ui-instructions]: https://github.com/mattleibow/tailspin-toys-workshop-dotnet/blob/main/.github/instructions/tailwindcss.instructions.md
+[blazor-instructions]: https://github.com/mattleibow/tailspin-toys-workshop-dotnet/blob/main/.github/instructions/blazor.instructions.md

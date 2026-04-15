@@ -62,7 +62,7 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
     copilot --allow-all-tools --enable-all-github-mcp-tools
     ```
 
-4. Return to the workshop branch by executing a CLI command from directly inside Copilot by using the following prompt:
+4. Return to the default branch so the accessibility agent starts from a clean codebase:
 
     ```
     !git checkout main
@@ -70,6 +70,9 @@ You can start a custom agent in Copilot CLI by using the `/agent` command. Let's
 
 > [!NOTE]
 > Prefixing a prompt with a `!` allows you to execute CLI tools from directly inside Copilot CLI.
+
+> [!TIP]
+> We switch back to `main` so the accessibility agent reviews the base project. Any uncommitted changes from previous exercises on other branches won't interfere. Your earlier work is safely on branches and pull requests.
 
 > [!IMPORTANT]
 > This exercise assumes you are working in **your own repository created from the template** with the backlog issues from Exercise 3 already created, and that Copilot CLI can open a pull request in that repository. Because the custom agent creates the PR via the built-in GitHub MCP server, make sure you started Copilot CLI with `--enable-all-github-mcp-tools`.

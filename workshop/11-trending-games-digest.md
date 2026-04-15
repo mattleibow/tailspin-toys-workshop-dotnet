@@ -106,21 +106,14 @@ If you want to adjust the prompt, simply edit the markdown body and the change t
 gh aw compile trending-games
 ```
 
-## Part 3 — Open a PR and run the workflow
+## Part 3 — Push to main and run the workflow
 
-Stay in the `agentic-workflows` agent and ask it to create a pull request for you:
-
-```
-Can you please create a pull request for me!
-```
-
-This reuses the same PR skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
-
-Open the PR on GitHub and merge it, then return to your terminal:
+Commit and push the workflow files directly to `main`:
 
 ```bash
-git checkout main
-git pull
+git add -A
+git commit -m "Add trending games digest workflow"
+git push
 ```
 
 Then trigger a manual run:

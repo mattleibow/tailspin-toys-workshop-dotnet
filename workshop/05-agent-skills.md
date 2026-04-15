@@ -59,6 +59,9 @@ Because Tailspin Toys has a set of requirements for creating PRs, they created a
 
 As highlighted previously, skills are automatically invoked by Copilot CLI. As a result, all we need to do is ask Copilot to create a PR!
 
+> [!NOTE]
+> At this point, your working tree should contain the filtering code generated in Exercise 4. The publishers endpoint from Exercise 2 was already committed to `main`, so this PR will contain only the filtering changes.
+
 > [!IMPORTANT]
 > This exercise assumes you are working in **your own repository created from the template** and that Copilot CLI is authenticated to GitHub with permission to create branches and pull requests. Because the PR is created through the built-in GitHub MCP server, you must also start Copilot CLI with the `--enable-all-github-mcp-tools` flag so write operations are allowed.
 
@@ -80,7 +83,7 @@ As highlighted previously, skills are automatically invoked by Copilot CLI. As a
 
     ![Screenshot of the agent skill being called by Copilot CLI](./images/5-agent-skill.png)
 
-6. Copilot will then follow the instructions in the skill. It start by running the tests. Then it will create a branch, commits, and eventually the PR.
+6. Copilot will then follow the instructions in the skill. It will start by running the tests. Then it will create a branch, commits, and eventually the PR.
 7. Once the PR is created, return to your repository and open the PR. Note the sections follow the guidelines set forth in the skill, matching the requirements the team put forth.
 
 ## Summary and next steps
