@@ -4,7 +4,7 @@ There's more to writing code than just writing code. Issues need to be filed, ex
 
 ## Scenario
 
-You are a part-time developer for Tailspin Toys - a crowdfunding platform for board games with a developer theme. You've been assigned various tasks to introduce new functionality to the website. Being a good team member, you want to file issues to track your work. To help future you, you've decided to enlist the help of Copilot. You will set up your backlog of work for the rest of the lab, Copilot CLI and the GitHub Model Context Protocol (MCP) server to create the issues for you. You'll also register MCP servers for the various technologies used in the project.
+You are a part-time developer for Tailspin Toys - a crowdfunding platform for games with a developer theme. You've been assigned various tasks to introduce new functionality to the website. Being a good team member, you want to file issues to track your work. To help future you, you've decided to enlist the help of Copilot. You will set up your backlog of work for the rest of the lab, Copilot CLI and the GitHub Model Context Protocol (MCP) server to create the issues for you. You'll also register MCP servers for the various technologies used in the project.
 
 In this exercise, you will:
 

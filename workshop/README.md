@@ -72,7 +72,7 @@ This full-stack application provides an excellent playground for exploring Copil
 | [8. Agentic Workflows Setup][ex8] | Setup | Authenticate GitHub, install gh aw, and configure repo secrets |
 | [9. First Agentic Workflow][ex9] | Automation | Initialise gh aw, create a daily digest, open a PR, and run it |
 | [10. ChatOps: Game Lookup][ex10] | ChatOps | Create a /game-lookup slash command |
-| [11. Trending Games Digest][ex11] | External APIs | Fetch BoardGameGeek trending games on a schedule |
+| [11. Trending Games Digest][ex11] | External APIs | Fetch popular FreeToGame titles on a schedule |
 | [12. Review & Next Steps][ex12] | Summary | Recap both parts and continue learning |
 
 ## Tips for Success
