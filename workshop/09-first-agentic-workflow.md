@@ -116,21 +116,20 @@ And the body is a plain-English description of what the agent should do.
 
 ## Open a PR and run the workflow
 
-Use the default Copilot agent to package the generated workflow into a pull request:
+Stay in the `agentic-workflows` agent and use it to package the generated workflow into a pull request.
 
-1. Type `/agent` and press Enter.
-2. Select the default agent.
-3. Enter this prompt:
+1. Make sure you are still in the `agentic-workflows` agent. If not, type `/agent` and select it again.
+2. Enter this prompt:
 
    ```
    Can you please create a pull request for me!
    ```
 
-This reuses the same `branches-commits-prs` skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
+This reuses the same PR skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
 
-4. Open the PR on GitHub and merge it.
+3. Open the PR on GitHub and merge it.
 
-5. Return to your terminal and switch back to `main`:
+4. Return to your terminal and switch back to `main`:
 
 ```bash
 git checkout main
