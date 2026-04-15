@@ -13,8 +13,8 @@ This workshop is split into two parts:
 
 By the end of this workshop, you will be able to:
 
-1. **Understand custom instructions** — Provide context and guidelines to improve code generation quality
-2. **Install and configure GitHub Copilot CLI** — Set up Copilot CLI in a codespace and authenticate with GitHub
+1. **Install and configure GitHub Copilot CLI** — Set up Copilot CLI in a codespace and authenticate with GitHub
+2. **Understand custom instructions** — Provide context and guidelines to improve code generation quality
 3. **Work with MCP servers** — Extend Copilot CLI's capabilities by connecting to external services
 4. **Generate and modify code** — Leverage AI to create new features from the terminal
 5. **Use agent skills** — Enhance Copilot's capabilities with specialized skills
@@ -52,7 +52,7 @@ This full-stack application provides an excellent playground for exploring Copil
 
 ## Workshop Exercises
 
-### Part 1: Building with Copilot CLI (~90 min)
+### Part 1: Building with Copilot CLI (~80 min)
 
 | Exercise | Topic | Description |
 |----------|-------|-------------|

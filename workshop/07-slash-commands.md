@@ -89,7 +89,7 @@ In most sessions with Copilot context will be managed efficiently by Copilot its
 
 ## Choosing your model
 
-Different models have different strengths, and different developers have different models. Copilot CLI allows you to list and select the model you wish to use!
+Different models have different strengths, and developers often have preferences based on their tasks. Copilot CLI allows you to list and select the model you wish to use!
 
 1. Return to your codespace.
 2. If hidden, show the terminal window by selecting <kbd>Ctrl</kbd>+<kbd>\`</kbd>.

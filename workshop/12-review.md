@@ -8,8 +8,8 @@ Over the course of this workshop, you've gone from learning about Copilot CLI to
 
 ### Part 1: Building with Copilot CLI
 
-1. **Custom Instructions** — Provided Copilot with project-specific context using `.github/copilot-instructions.md` and `.instructions` files.
-2. **Installing Copilot CLI** — Set up and authenticated GitHub Copilot in the terminal.
+1. **Installing Copilot CLI** — Set up and authenticated GitHub Copilot in the terminal.
+2. **Custom Instructions** — Provided Copilot with project-specific context using `.github/copilot-instructions.md` and `.instructions` files.
 3. **MCP Servers** — Connected to GitHub, Playwright, and Microsoft Learn via Model Context Protocol to extend Copilot's capabilities.
 4. **Generating Code** — Used plan mode to design features and generated code to implement filtering in Tailspin Toys.
 5. **Agent Skills** — Leveraged reusable skills to create pull requests that follow team guidelines.

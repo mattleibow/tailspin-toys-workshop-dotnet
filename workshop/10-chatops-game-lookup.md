@@ -111,7 +111,7 @@ safe-outputs:
 > [!TIP]
 > You can edit the markdown body directly (on GitHub.com or locally) without recompiling. For example, you can tweak the output template or adjust what details are included.
 
-## Part 3 — Open a PR and merge it
+## Part 3 — Push to main
 
 If the agent did not compile the workflow automatically, compile it now:
 
@@ -119,23 +119,16 @@ If the agent did not compile the workflow automatically, compile it now:
 gh aw compile game-lookup
 ```
 
-Then, while still in the `agentic-workflows` agent, ask Copilot to create a pull request:
-
-```
-Can you please create a pull request for me!
-```
-
-This reuses the same PR skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
-
-Open the PR on GitHub and merge it, then switch back to `main`:
+Now commit and push the workflow files directly to `main`. Since the workflow lock file must be on the default branch to work, we'll push directly this time:
 
 ```bash
-git checkout main
-git pull
+git add -A
+git commit -m "Add game-lookup ChatOps workflow"
+git push
 ```
 
 > [!IMPORTANT]
-> The `issue_comment` trigger only fires when the workflow lock file is on the **default branch** of the repository (usually `main`). Make sure you push to `main` (or merge a PR into `main`) before testing.
+> The `issue_comment` trigger only fires when the workflow lock file is on the **default branch** of the repository (usually `main`). That's why we push directly to `main` here rather than opening a PR.
 
 ## Part 4 — Test the slash command
 

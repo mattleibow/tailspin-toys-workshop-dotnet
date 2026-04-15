@@ -129,9 +129,9 @@ Congratulations, you have created issues on GitHub using Copilot CLI and MCP, an
 
 To recap, in this exercise you:
 
-- explore Model Context Protocol (MCP), which provides access to external tools and capabilities.
-- set up and utilize MCP servers in GitHub Copilot CLI.
-- use GitHub Copilot CLI to create issues in your repository.
+- explored Model Context Protocol (MCP), which provides access to external tools and capabilities.
+- set up and utilized MCP servers in GitHub Copilot CLI.
+- used GitHub Copilot CLI to create issues in your repository.
 
 With the GitHub MCP server configured, you can now use GitHub Copilot CLI to perform additional actions on your behalf, like creating new repositories, managing pull requests, and searching for information across your repositories.
 

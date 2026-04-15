@@ -6,7 +6,7 @@ Before you get started on the lab, there's a few tasks you need to complete to g
 
 To create a copy of the repository for the code you'll create an instance from the [template][template-repository]. The new instance will contain all of the necessary files for the lab, and you'll use it as you work through the exercises. 
 
-1. In a new browser window, navigate to the GitHub repository for this lab: `https://github.com/mattleibow/tailspin-toys-workshop`.
+1. In a new browser window, navigate to the GitHub repository for this lab: `https://github.com/mattleibow/tailspin-toys-workshop-dotnet`.
 2. Create your own copy of the repository by selecting the **Use this template** button on the lab repository page. Then select **Create a new repository**.
 
     ![Use this template button](./images/0-use-template.png)
@@ -82,5 +82,5 @@ Congratulations, you have created a copy of the lab repository and selected your
 ---
 
 [codespaces]: https://github.com/features/codespaces
-[template-repository]: https://docs.github.com/repositories/creating-and-managing-repositories/creating-a-template-repository
+[template-repository]: https://docs.github.com/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
 [codespaces-quickstart]: https://docs.github.com/codespaces/getting-started/quickstart

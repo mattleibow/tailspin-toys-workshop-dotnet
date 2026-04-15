@@ -16,8 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <link rel="alternate" hreflang="en" href="https://mattleibow.github.io/tailspin-toys-workshop/">
-    <link rel="alternate" hreflang="x-default" href="https://mattleibow.github.io/tailspin-toys-workshop/">
+    <link rel="alternate" hreflang="en" href="https://mattleibow.github.io/tailspin-toys-workshop-dotnet/">
+    <link rel="alternate" hreflang="x-default" href="https://mattleibow.github.io/tailspin-toys-workshop-dotnet/">
     <link rel="stylesheet" href="step.css">
     <link rel="stylesheet" href="light-theme.css">
     <script src="theme-toggle.js"></script>
@@ -30,12 +30,6 @@
                 <span class="header-title">Copilot CLI Workshop</span>
             </a>
             <div class="header-nav">
-                <div class="locale-picker" id="localePicker">
-                    <button type="button" class="locale-toggle" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">🌐</button>
-                    <ul role="listbox" aria-label="Language">
-                        <li role="option" data-locale="en" aria-selected="true" class="active">🇬🇧 English</li>
-                    </ul>
-                </div>
                 <button class="theme-toggle" onclick="toggleTheme()">☀️ Light</button>
                 <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>← Prev</button>
                 <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
@@ -80,7 +74,7 @@
         ];
 
         const DEFAULT_REPO_OWNER = 'mattleibow';
-        const DEFAULT_REPO_NAME = 'tailspin-toys-workshop';
+        const DEFAULT_REPO_NAME = 'tailspin-toys-workshop-dotnet';
         const WORKSHOP_BRANCH = 'main';
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
         const isGitHubPages = window.location.hostname.endsWith('.github.io');
@@ -322,37 +316,6 @@
 
         // Initialize
         loadStep(getStepFromURL());
-    </script>
-    <script>
-    (function(){
-      var match=location.pathname.match(/\/(pt_BR|es)\//);
-      var locale=match?match[1]:'en';
-      var picker=document.getElementById('localePicker');
-      if(!picker)return;
-      var btn=picker.querySelector('.locale-toggle'),list=picker.querySelector('ul');
-      list.querySelectorAll('li').forEach(function(li){
-        var l=li.dataset.locale==='pt-BR'?'pt_BR':li.dataset.locale;
-        if(l===locale){li.classList.add('active');li.setAttribute('aria-selected','true');}
-        else{li.classList.remove('active');li.setAttribute('aria-selected','false');}
-      });
-      function open(){list.style.display='block';btn.setAttribute('aria-expanded','true');}
-      function close(){list.style.display='none';btn.setAttribute('aria-expanded','false');}
-      btn.addEventListener('click',function(e){e.stopPropagation();list.style.display==='block'?close():open();});
-      document.addEventListener('click',close);
-      document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-      list.querySelectorAll('li').forEach(function(li){
-        li.addEventListener('click',function(e){
-          e.stopPropagation();
-          var t=li.dataset.locale==='pt-BR'?'pt_BR':li.dataset.locale;
-          if(t===locale){close();return;}
-          var p=location.pathname;
-          if(locale!=='en')p=p.replace(new RegExp('/'+locale+'/'),'/');;
-          if(t!=='en'){var base=p.replace(/\/index\.html$/,'/');if(!base.endsWith('/'))base+='/';p=base+t+'/';}
-          localStorage.setItem('preferred-locale',t);
-          window.location.href=p;
-        });
-      });
-    })();
     </script>
 </body>
 </html>

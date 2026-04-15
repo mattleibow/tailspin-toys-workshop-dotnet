@@ -14,20 +14,14 @@
     <title>GitHub Copilot CLI &amp; Agentic Workflows Workshop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="alternate" hreflang="en" href="https://mattleibow.github.io/tailspin-toys-workshop/">
-    <link rel="alternate" hreflang="x-default" href="https://mattleibow.github.io/tailspin-toys-workshop/">
+    <link rel="alternate" hreflang="en" href="https://mattleibow.github.io/tailspin-toys-workshop-dotnet/">
+    <link rel="alternate" hreflang="x-default" href="https://mattleibow.github.io/tailspin-toys-workshop-dotnet/">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="light-theme.css">
     <script src="theme-toggle.js"></script>
 </head>
 <body>
     <div style="position:fixed;top:1rem;right:1rem;z-index:1000;display:flex;gap:0.5rem;align-items:center;">
-        <div class="locale-picker" id="localePicker">
-            <button type="button" class="locale-toggle" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">🌐</button>
-            <ul role="listbox" aria-label="Language">
-                <li role="option" data-locale="en" aria-selected="true" class="active">🇬🇧 English</li>
-            </ul>
-        </div>
         <button class="theme-toggle" onclick="toggleTheme()">☀️ Light</button>
     </div>
     <section class="hero">
@@ -37,15 +31,15 @@
             <p class="hero-subtitle">Master GitHub Copilot in the terminal. Build features with custom instructions, MCP servers, and custom agents — then automate your repo with agentic workflows and ChatOps. A hands-on workshop with the Tailspin Toys project.</p>
             <div class="hero-cta">
                 <a href="step.html?step=readme" class="btn btn-primary">🚀 Start Workshop</a>
-                <a href="https://github.com/mattleibow/tailspin-toys-workshop" class="btn btn-secondary" target="_blank">⭐ GitHub Repo</a>
+                <a href="https://github.com/mattleibow/tailspin-toys-workshop-dotnet" class="btn btn-secondary" target="_blank">⭐ GitHub Repo</a>
             </div>
             <div class="stats">
                 <div class="stat">
-                    <div class="stat-value">~150min</div>
+                    <div class="stat-value">~155min</div>
                     <div class="stat-label">Duration</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value">12</div>
+                    <div class="stat-value">13</div>
                     <div class="stat-label">Exercises</div>
                 </div>
                 <div class="stat">
@@ -247,43 +241,12 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="https://github.com/mattleibow/tailspin-toys-workshop" target="_blank">GitHub Repository</a>
+                <a href="https://github.com/mattleibow/tailspin-toys-workshop-dotnet" target="_blank">GitHub Repository</a>
                 <a href="https://code.visualstudio.com/docs/copilot/overview" target="_blank">Copilot Docs</a>
                 <a href="https://github.com/github/awesome-copilot" target="_blank">Awesome Copilot</a>
             </div>
             <p class="footer-credit">Built with 💜 by the GitHub Copilot Team</p>
         </div>
     </footer>
-    <script>
-    (function(){
-      var match=location.pathname.match(/\/(pt_BR|es)\//);
-      var locale=match?match[1]:'en';
-      var picker=document.getElementById('localePicker');
-      if(!picker)return;
-      var btn=picker.querySelector('.locale-toggle'),list=picker.querySelector('ul');
-      list.querySelectorAll('li').forEach(function(li){
-        var l=li.dataset.locale==='pt-BR'?'pt_BR':li.dataset.locale;
-        if(l===locale){li.classList.add('active');li.setAttribute('aria-selected','true');}
-        else{li.classList.remove('active');li.setAttribute('aria-selected','false');}
-      });
-      function open(){list.style.display='block';btn.setAttribute('aria-expanded','true');}
-      function close(){list.style.display='none';btn.setAttribute('aria-expanded','false');}
-      btn.addEventListener('click',function(e){e.stopPropagation();list.style.display==='block'?close():open();});
-      document.addEventListener('click',close);
-      document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
-      list.querySelectorAll('li').forEach(function(li){
-        li.addEventListener('click',function(e){
-          e.stopPropagation();
-          var t=li.dataset.locale==='pt-BR'?'pt_BR':li.dataset.locale;
-          if(t===locale){close();return;}
-          var p=location.pathname;
-          if(locale!=='en')p=p.replace(new RegExp('/'+locale+'/'),'/');;
-          if(t!=='en'){var base=p.replace(/\/index\.html$/,'/');if(!base.endsWith('/'))base+='/';p=base+t+'/';}
-          localStorage.setItem('preferred-locale',t);
-          window.location.href=p;
-        });
-      });
-    })();
-    </script>
 </body>
 </html>
