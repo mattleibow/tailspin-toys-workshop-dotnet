@@ -27,13 +27,9 @@ The Tailspin Toys team is evaluating new games to feature on their crowdfunding 
 
 ## Part 1 — Create the slash command workflow
 
-Create the workflow with `gh aw new`:
+Make sure you are still in the `agentic-workflows` agent. If not, type `/agent` and select it again.
 
-```bash
-gh aw new game-lookup
-```
-
-When the interactive session opens, describe what you want:
+Then describe what you want:
 
 ```
 Create a ChatOps slash command called /game-lookup. When a user posts
@@ -51,6 +47,8 @@ where <name> is a board game name, do the following:
    in Markdown, including a link to the BGG page.
 If no game name is provided or no results are found, reply with a
 helpful error message.
+
+Name the workflow file game-lookup.
 ```
 
 The agent will configure:
@@ -99,7 +97,7 @@ safe-outputs:
 > [!TIP]
 > You can edit the markdown body directly (on GitHub.com or locally) without recompiling. For example, you can tweak the output template or adjust what details are included.
 
-## Part 3 — Compile, commit, and push
+## Part 3 — Open a PR and merge it
 
 If the agent did not compile the workflow automatically, compile it now:
 
@@ -107,12 +105,19 @@ If the agent did not compile the workflow automatically, compile it now:
 gh aw compile game-lookup
 ```
 
-Commit and push both the markdown and the lock file:
+Then, while still in the `agentic-workflows` agent, ask Copilot to create a pull request:
+
+```
+Can you please create a pull request for me!
+```
+
+This reuses the same PR skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
+
+Open the PR on GitHub and merge it, then switch back to `main`:
 
 ```bash
-git add .github/workflows/game-lookup.md .github/workflows/game-lookup.lock.yml
-git commit -m "Add game-lookup ChatOps slash command"
-git push
+git checkout main
+git pull
 ```
 
 > [!IMPORTANT]
@@ -177,6 +182,8 @@ You've built a ChatOps slash command that lets the Tailspin Toys team look up bo
 - parse arguments from a slash command.
 - call an external API and format the results.
 - use `add-comment` safe outputs to reply inline.
+
+If you have more time, the next exercise shows how to build a scheduled digest that pulls trending games from an external API.
 
 ## Resources
 

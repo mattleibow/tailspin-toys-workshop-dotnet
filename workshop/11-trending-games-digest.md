@@ -1,6 +1,6 @@
-# Exercise 9 - Trending Games Digest
+# Exercise 11 - Trending Games Digest
 
-In the previous exercise you created your first agentic workflow — a daily digest of issues and PRs. Now you'll build something more powerful: a workflow that reaches out to an **external API** and brings data into your GitHub repository automatically.
+In the previous exercise you used the ChatOps pattern to trigger a workflow from a GitHub comment. Now you'll build something more powerful: a workflow that reaches out to an **external API** and brings data into your GitHub repository automatically.
 
 **Estimated time:** 20 minutes
 
@@ -26,13 +26,9 @@ Your agentic workflow will call these endpoints, parse the results, and format t
 
 ## Part 1 — Create the workflow
 
-Create the workflow with `gh aw new`:
+Make sure you are still in the `agentic-workflows` agent. If not, type `/agent` and select it again.
 
-```bash
-gh aw new trending-games
-```
-
-When the interactive agent session opens, provide the following description:
+Then provide the following description:
 
 ```
 Create a daily digest workflow for the Tailspin Toys team that tracks
@@ -45,6 +41,9 @@ the year published, and a link to its BGG page
 titled "🎲 Trending Games – <date>" with the results formatted as a
 Markdown table. Add a brief intro paragraph explaining these are the
 currently trending games on BoardGameGeek.
+
+Name the workflow file trending-games.
+Allow for manual runs.
 ```
 
 The agent will confirm the trigger (weekday schedule), required tools (`web-fetch`), permissions (`issues: write`), and the network allowlist (the BGG API domain), then generate the workflow files.
@@ -97,14 +96,21 @@ If you want to adjust the prompt, simply edit the markdown body and the change t
 gh aw compile trending-games
 ```
 
-## Part 3 — Commit and run the workflow
+## Part 3 — Open a PR and run the workflow
 
-Commit and push both the markdown and the lock file:
+Stay in the `agentic-workflows` agent and ask it to create a pull request for you:
+
+```
+Can you please create a pull request for me!
+```
+
+This reuses the same PR skill from earlier in the workshop to commit, push, and open a PR for your workflow files.
+
+Open the PR on GitHub and merge it, then return to your terminal:
 
 ```bash
-git add .github/workflows/trending-games.md .github/workflows/trending-games.lock.yml
-git commit -m "Add trending games digest workflow"
-git push
+git checkout main
+git pull
 ```
 
 Then trigger a manual run:
@@ -141,7 +147,7 @@ You've created a workflow that automatically monitors the board game world for T
 - review, refine, compile, and trigger a workflow.
 - validate the output issue.
 
-In the next exercise, you'll take this even further with **ChatOps** — creating a slash command that team members can use directly from GitHub issues.
+This optional extension shows how Agentic Workflows can also pull live data from external services and turn it into useful updates for your team.
 
 ## Resources
 

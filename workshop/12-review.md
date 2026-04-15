@@ -1,4 +1,4 @@
-# Exercise 11 - Review and Next Steps
+# Exercise 12 - Review and Next Steps
 
 Congratulations on completing the workshop! 🎉🚀
 
@@ -18,9 +18,10 @@ Over the course of this workshop, you've gone from learning about Copilot CLI to
 
 ### Part 2: Automating with Agentic Workflows
 
-8. **Agentic Workflows** — Installed `gh aw`, initialised workflows in your repo, and created a daily issue/PR digest.
-9. **Trending Games Digest** — Built a scheduled workflow that pulls trending board games from the BoardGameGeek API and posts them as a daily GitHub issue.
+8. **Agentic Workflows Setup** — Authenticated GitHub CLI, installed `gh aw`, and configured the repository secret needed for Actions runs.
+9. **First Agentic Workflow** — Initialised workflows in your repo and created a daily issue/PR digest.
 10. **ChatOps Game Lookup** — Created a `/game-lookup` slash command that lets team members look up board game details directly from a GitHub issue comment.
+11. **Trending Games Digest** — Built a scheduled workflow that pulls trending board games from the BoardGameGeek API and posts them as a daily GitHub issue.
 
 ## Key takeaways
 
