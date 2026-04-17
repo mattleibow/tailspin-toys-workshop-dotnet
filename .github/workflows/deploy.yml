@@ -44,7 +44,7 @@ jobs:
           [ "$src_count" -eq "$dest_count" ] || { echo "Image copy mismatch: source=$src_count destination=$dest_count."; exit 1; }
           touch ./_site/.nojekyll
 
-      - uses: actions/configure-pages@v4
+      - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
